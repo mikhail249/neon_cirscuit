@@ -1,0 +1,54 @@
+# Unity-generated caches, temporary files, logs, and local settings.
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/Assets/_Recovery/
+/Assets/_Recovery.meta
+
+# Local development and QA output.
+/.vs/
+/.vscode/
+/.idea/
+/tmp/
+/work/
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.log
+sysinfo.txt
+
+# OS metadata.
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local credentials and signing keys must not be published.
+.env
+.env.*
+!.env.example
+!.env.template
+*.keystore
+*.jks
+*.pfx
+*.p12
+*.pem
+*.key
+
+# Keep Unity .meta files: they preserve references between assets.

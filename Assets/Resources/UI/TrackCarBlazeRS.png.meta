@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: 7b70754e7161d8842832d5dd8bdc0999
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1941971718517297907
+    second: TrackCarBlazeRS_0
+  - first:
+      213: -4650995080137740412
+    second: TrackCarBlazeRS_1
+  - first:
+      213: 5999827469259531037
+    second: TrackCarBlazeRS_2
+  - first:
+      213: 6164763518171062377
+    second: TrackCarBlazeRS_3
+  - first:
+      213: 6521311247498811231
+    second: TrackCarBlazeRS_4
+  - first:
+      213: -7324981046940875215
+    second: TrackCarBlazeRS_5
+  - first:
+      213: 6300746677655801660
+    second: TrackCarBlazeRS_6
+  - first:
+      213: 5251604090364779181
+    second: TrackCarBlazeRS_7
+  - first:
+      213: -5623777991628948445
+    second: TrackCarBlazeRS_8
+  - first:
+      213: -4087027957254346824
+    second: TrackCarBlazeRS_9
+  - first:
+      213: 6404725726764147405
+    second: TrackCarBlazeRS_10
+  - first:
+      213: -7803878091109341225
+    second: TrackCarBlazeRS_11
+  - first:
+      213: 1571908645507530892
+    second: TrackCarBlazeRS_12
+  - first:
+      213: -2071459092651417726
+    second: TrackCarBlazeRS_13
+  - first:
+      213: 8826213564170541734
+    second: TrackCarBlazeRS_14
+  - first:
+      213: 7921731819903425084
+    second: TrackCarBlazeRS_15
+  - first:
+      213: 819233908773366711
+    second: TrackCarBlazeRS_16
+  - first:
+      213: 3686523286820788013
+    second: TrackCarBlazeRS_17
+  - first:
+      213: 1076529039195334050
+    second: TrackCarBlazeRS_18
+  - first:
+      213: 8502517920710336554
+    second: TrackCarBlazeRS_19
+  - first:
+      213: 5013930582352937731
+    second: TrackCarBlazeRS_20
+  - first:
+      213: 2546126648620865113
+    second: TrackCarBlazeRS_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 640
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 64
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 61
+        width: 965
+        height: 1447
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0debe1d20bbc05e0800000000000000
+      internalID: -1941971718517297907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_1
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 1331
+        width: 51
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48fec4cdd98547fb0800000000000000
+      internalID: -4650995080137740412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_2
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 1329
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1368da7b4ba34350800000000000000
+      internalID: 5999827469259531037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 1191
+        width: 49
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 960afd8e1c3ad8550800000000000000
+      internalID: 6164763518171062377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_4
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 1191
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f571de8370a508a50800000000000000
+      internalID: 6521311247498811231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_5
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1087
+        width: 25
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 136ce961c80785a90800000000000000
+      internalID: -7324981046940875215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_6
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1098
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3f856578bfb07750800000000000000
+      internalID: 6300746677655801660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_7
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1091
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daa5e23981271e840800000000000000
+      internalID: 5251604090364779181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_8
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 919
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32cfb4176b354f1b0800000000000000
+      internalID: -5623777991628948445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_9
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 873
+        width: 29
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b7a3c41ab5f747c0800000000000000
+      internalID: -4087027957254346824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_10
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 871
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc225936d1822e850800000000000000
+      internalID: 6404725726764147405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_11
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 854
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d769fc093e03b390800000000000000
+      internalID: -7803878091109341225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_12
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 791
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8087d2b59a80d510800000000000000
+      internalID: 1571908645507530892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_13
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 786
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28f52c72ee2b043e0800000000000000
+      internalID: -2071459092651417726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_14
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 741
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aa9e1c29720d7a70800000000000000
+      internalID: 8826213564170541734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_15
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 710
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3a904b7e15afed60800000000000000
+      internalID: 7921731819903425084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_16
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 622
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bb246846e08e5b00800000000000000
+      internalID: 819233908773366711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_17
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 609
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d279827b569292330800000000000000
+      internalID: 3686523286820788013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_18
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 579
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a561ab157990fe00800000000000000
+      internalID: 1076529039195334050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_19
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 551
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a20255820030ff570800000000000000
+      internalID: 8502517920710336554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_20
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 513
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3034d99bc4f059540800000000000000
+      internalID: 5013930582352937731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrackCarBlazeRS_21
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 439
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 956d33c62b8a55320800000000000000
+      internalID: 2546126648620865113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TrackCarBlazeRS_0: -1941971718517297907
+      TrackCarBlazeRS_1: -4650995080137740412
+      TrackCarBlazeRS_10: 6404725726764147405
+      TrackCarBlazeRS_11: -7803878091109341225
+      TrackCarBlazeRS_12: 1571908645507530892
+      TrackCarBlazeRS_13: -2071459092651417726
+      TrackCarBlazeRS_14: 8826213564170541734
+      TrackCarBlazeRS_15: 7921731819903425084
+      TrackCarBlazeRS_16: 819233908773366711
+      TrackCarBlazeRS_17: 3686523286820788013
+      TrackCarBlazeRS_18: 1076529039195334050
+      TrackCarBlazeRS_19: 8502517920710336554
+      TrackCarBlazeRS_2: 5999827469259531037
+      TrackCarBlazeRS_20: 5013930582352937731
+      TrackCarBlazeRS_21: 2546126648620865113
+      TrackCarBlazeRS_3: 6164763518171062377
+      TrackCarBlazeRS_4: 6521311247498811231
+      TrackCarBlazeRS_5: -7324981046940875215
+      TrackCarBlazeRS_6: 6300746677655801660
+      TrackCarBlazeRS_7: 5251604090364779181
+      TrackCarBlazeRS_8: -5623777991628948445
+      TrackCarBlazeRS_9: -4087027957254346824
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

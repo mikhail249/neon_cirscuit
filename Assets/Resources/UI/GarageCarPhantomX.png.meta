@@ -1,0 +1,1040 @@
+fileFormatVersion: 2
+guid: 6f46eed5a327c4f44b2862ea0bf28bfc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8319603506470455180
+    second: GarageCarPhantomX_0
+  - first:
+      213: -8191477128877657462
+    second: GarageCarPhantomX_1
+  - first:
+      213: 2898836646451484242
+    second: GarageCarPhantomX_2
+  - first:
+      213: 3169205563196984403
+    second: GarageCarPhantomX_3
+  - first:
+      213: -6785624573028207553
+    second: GarageCarPhantomX_4
+  - first:
+      213: 4952747522647500814
+    second: GarageCarPhantomX_5
+  - first:
+      213: -1609028164776949528
+    second: GarageCarPhantomX_6
+  - first:
+      213: 3861797750265100632
+    second: GarageCarPhantomX_7
+  - first:
+      213: -9119148335207358819
+    second: GarageCarPhantomX_8
+  - first:
+      213: -1382921703315915799
+    second: GarageCarPhantomX_9
+  - first:
+      213: -1425441422363825594
+    second: GarageCarPhantomX_10
+  - first:
+      213: 193699880015439839
+    second: GarageCarPhantomX_11
+  - first:
+      213: -6636130222082310308
+    second: GarageCarPhantomX_12
+  - first:
+      213: -2377254929939197483
+    second: GarageCarPhantomX_13
+  - first:
+      213: 3471815925416785145
+    second: GarageCarPhantomX_14
+  - first:
+      213: 6221001122848072617
+    second: GarageCarPhantomX_15
+  - first:
+      213: 8208721645820755775
+    second: GarageCarPhantomX_16
+  - first:
+      213: 6908946246519533256
+    second: GarageCarPhantomX_17
+  - first:
+      213: -2424581978184515620
+    second: GarageCarPhantomX_18
+  - first:
+      213: 5976548974201464920
+    second: GarageCarPhantomX_19
+  - first:
+      213: 6750995416481124504
+    second: GarageCarPhantomX_20
+  - first:
+      213: 4442242725575728259
+    second: GarageCarPhantomX_21
+  - first:
+      213: 3111614218417705089
+    second: GarageCarPhantomX_22
+  - first:
+      213: 8701202902449649516
+    second: GarageCarPhantomX_23
+  - first:
+      213: -8837851742940529797
+    second: GarageCarPhantomX_24
+  - first:
+      213: 7096321795585376405
+    second: GarageCarPhantomX_25
+  - first:
+      213: 5820665554181870306
+    second: GarageCarPhantomX_26
+  - first:
+      213: -8244969184467439045
+    second: GarageCarPhantomX_27
+  - first:
+      213: -3071337533327808016
+    second: GarageCarPhantomX_28
+  - first:
+      213: -3581709044691974918
+    second: GarageCarPhantomX_29
+  - first:
+      213: -6944697256984824481
+    second: GarageCarPhantomX_30
+  - first:
+      213: 8581563702114294379
+    second: GarageCarPhantomX_31
+  - first:
+      213: 6903452212257517850
+    second: GarageCarPhantomX_32
+  - first:
+      213: 5113296140285078577
+    second: GarageCarPhantomX_33
+  - first:
+      213: -8321117190972810346
+    second: GarageCarPhantomX_34
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GarageCarPhantomX_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17
+        width: 1975
+        height: 725
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c87044b5f4b257370800000000000000
+      internalID: 8319603506470455180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_1
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 48
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a82b28b93f6025e80800000000000000
+      internalID: -8191477128877657462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_2
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 32
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25610ad329cba3820800000000000000
+      internalID: 2898836646451484242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_3
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 78
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35c4c862ba74bfb20800000000000000
+      internalID: 3169205563196984403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_4
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 66
+        width: 40
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f34fd71176e94d1a0800000000000000
+      internalID: -6785624573028207553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_5
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 74
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e08a99d81a1bbb440800000000000000
+      internalID: 4952747522647500814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_6
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 89
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e80fdcb8659ba9e0800000000000000
+      internalID: -1609028164776949528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_7
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 64
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85934fad79cd79530800000000000000
+      internalID: 3861797750265100632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_8
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 95
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9eded987e6427180800000000000000
+      internalID: -9119148335207358819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_9
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 85
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eb3da1b900eecce0800000000000000
+      internalID: -1382921703315915799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_10
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 64
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64a60e32490d73ce0800000000000000
+      internalID: -1425441422363825594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_11
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 97
+        width: 27
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd72b5db30920b200800000000000000
+      internalID: 193699880015439839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_12
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 62
+        width: 19
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5fbc8509bab7e3a0800000000000000
+      internalID: -6636130222082310308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_13
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 64
+        width: 90
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d19d688c3b420fd0800000000000000
+      internalID: -2377254929939197483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_14
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 63
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f4f200903e5e2030800000000000000
+      internalID: 3471815925416785145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_15
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 40
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a36aaa9f8f655650800000000000000
+      internalID: 6221001122848072617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_16
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 64
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3fb43f58dc3be170800000000000000
+      internalID: 8208721645820755775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_17
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 87
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cea01c810281ef50800000000000000
+      internalID: 6908946246519533256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_18
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 63
+        width: 58
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdf7f7d69872a5ed0800000000000000
+      internalID: -2424581978184515620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_19
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 83
+        width: 12
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 858e00e70a7f0f250800000000000000
+      internalID: 5976548974201464920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_20
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 78
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 890d5af109a50bd50800000000000000
+      internalID: 6750995416481124504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_21
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 64
+        width: 60
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38c1100193406ad30800000000000000
+      internalID: 4442242725575728259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_22
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 97
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18097d645acae2b20800000000000000
+      internalID: 3111614218417705089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_23
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 97
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c67fb1750f1e0c870800000000000000
+      internalID: 8701202902449649516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_24
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 66
+        width: 120
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7b767c2aa4a95580800000000000000
+      internalID: -8837851742940529797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_25
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 83
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5908abd33133b7260800000000000000
+      internalID: 7096321795585376405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_26
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 64
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e2dc597b7827c050800000000000000
+      internalID: 5820665554181870306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_27
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 80
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b32b6cfd53cf39d80800000000000000
+      internalID: -8244969184467439045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_28
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 104
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f9ebac39ca6065d0800000000000000
+      internalID: -3071337533327808016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_29
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 103
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af4c45eb9963b4ec0800000000000000
+      internalID: -3581709044691974918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_30
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 78
+        width: 47
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f553acca3aa7f9f90800000000000000
+      internalID: -6944697256984824481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_31
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 78
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6a98e158b6d71770800000000000000
+      internalID: 8581563702114294379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_32
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 78
+        width: 19
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a117e73063dfdcf50800000000000000
+      internalID: 6903452212257517850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_33
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 32
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c61198fb316f640800000000000000
+      internalID: 5113296140285078577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarPhantomX_34
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 34
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69b5ba18004758c80800000000000000
+      internalID: -8321117190972810346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GarageCarPhantomX_0: 8319603506470455180
+      GarageCarPhantomX_1: -8191477128877657462
+      GarageCarPhantomX_10: -1425441422363825594
+      GarageCarPhantomX_11: 193699880015439839
+      GarageCarPhantomX_12: -6636130222082310308
+      GarageCarPhantomX_13: -2377254929939197483
+      GarageCarPhantomX_14: 3471815925416785145
+      GarageCarPhantomX_15: 6221001122848072617
+      GarageCarPhantomX_16: 8208721645820755775
+      GarageCarPhantomX_17: 6908946246519533256
+      GarageCarPhantomX_18: -2424581978184515620
+      GarageCarPhantomX_19: 5976548974201464920
+      GarageCarPhantomX_2: 2898836646451484242
+      GarageCarPhantomX_20: 6750995416481124504
+      GarageCarPhantomX_21: 4442242725575728259
+      GarageCarPhantomX_22: 3111614218417705089
+      GarageCarPhantomX_23: 8701202902449649516
+      GarageCarPhantomX_24: -8837851742940529797
+      GarageCarPhantomX_25: 7096321795585376405
+      GarageCarPhantomX_26: 5820665554181870306
+      GarageCarPhantomX_27: -8244969184467439045
+      GarageCarPhantomX_28: -3071337533327808016
+      GarageCarPhantomX_29: -3581709044691974918
+      GarageCarPhantomX_3: 3169205563196984403
+      GarageCarPhantomX_30: -6944697256984824481
+      GarageCarPhantomX_31: 8581563702114294379
+      GarageCarPhantomX_32: 6903452212257517850
+      GarageCarPhantomX_33: 5113296140285078577
+      GarageCarPhantomX_34: -8321117190972810346
+      GarageCarPhantomX_4: -6785624573028207553
+      GarageCarPhantomX_5: 4952747522647500814
+      GarageCarPhantomX_6: -1609028164776949528
+      GarageCarPhantomX_7: 3861797750265100632
+      GarageCarPhantomX_8: -9119148335207358819
+      GarageCarPhantomX_9: -1382921703315915799
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

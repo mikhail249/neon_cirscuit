@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: b6781c29285de2249b8d6e0c03711890
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -371519659935164191
+    second: GarageCarBlazeRS_0
+  - first:
+      213: 8223439412683215832
+    second: GarageCarBlazeRS_1
+  - first:
+      213: 5558620894175087050
+    second: GarageCarBlazeRS_2
+  - first:
+      213: -4178640570993652897
+    second: GarageCarBlazeRS_3
+  - first:
+      213: 2483086513472036772
+    second: GarageCarBlazeRS_4
+  - first:
+      213: 1708599140093540754
+    second: GarageCarBlazeRS_5
+  - first:
+      213: -6926207617993464552
+    second: GarageCarBlazeRS_6
+  - first:
+      213: 709931286306391028
+    second: GarageCarBlazeRS_7
+  - first:
+      213: 5585726678779686572
+    second: GarageCarBlazeRS_8
+  - first:
+      213: 7079572873540939179
+    second: GarageCarBlazeRS_9
+  - first:
+      213: 499532698818115143
+    second: GarageCarBlazeRS_10
+  - first:
+      213: -1966794853130835912
+    second: GarageCarBlazeRS_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_0
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 781
+        width: 126
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e89d7276d818daf0800000000000000
+      internalID: -371519659935164191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 53
+        width: 1687
+        height: 725
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d31ee083968f1270800000000000000
+      internalID: 8223439412683215832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_2
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 128
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac9ce5e9040342d40800000000000000
+      internalID: 5558620894175087050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_3
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 105
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5b43e14a8c7206c0800000000000000
+      internalID: -4178640570993652897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_4
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 128
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4af501e2702b57220800000000000000
+      internalID: 2483086513472036772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_5
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 119
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29930d88dd926b710800000000000000
+      internalID: 1708599140093540754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_6
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 115
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81525e83eda21ef90800000000000000
+      internalID: -6926207617993464552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_7
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 120
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f38a375ebe2ad900800000000000000
+      internalID: 709931286306391028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_8
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 114
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caee515e1dc748d40800000000000000
+      internalID: 5585726678779686572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_9
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 138
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bad26e0f402bf3260800000000000000
+      internalID: 7079572873540939179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 103
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 746febac752bee600800000000000000
+      internalID: 499532698818115143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GarageCarBlazeRS_11
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 120
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 838e119608a84b4e0800000000000000
+      internalID: -1966794853130835912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GarageCarBlazeRS_0: -371519659935164191
+      GarageCarBlazeRS_1: 8223439412683215832
+      GarageCarBlazeRS_10: 499532698818115143
+      GarageCarBlazeRS_11: -1966794853130835912
+      GarageCarBlazeRS_2: 5558620894175087050
+      GarageCarBlazeRS_3: -4178640570993652897
+      GarageCarBlazeRS_4: 2483086513472036772
+      GarageCarBlazeRS_5: 1708599140093540754
+      GarageCarBlazeRS_6: -6926207617993464552
+      GarageCarBlazeRS_7: 709931286306391028
+      GarageCarBlazeRS_8: 5585726678779686572
+      GarageCarBlazeRS_9: 7079572873540939179
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
