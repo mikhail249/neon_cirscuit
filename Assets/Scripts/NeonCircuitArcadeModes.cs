@@ -2,7 +2,7 @@ using UnityEngine;
 
 public sealed partial class NeonCircuitGame
 {
-    private const float ArcadeDriftTarget = 1500f;
+    private const float ArcadeDriftTarget = 3000f;
     private const int ArcadeDriftReward = 450;
 
     private enum ArcadeRaceMode
@@ -107,7 +107,7 @@ public sealed partial class NeonCircuitGame
         {
             selectedCarIndex = 2;
             garageCarIndex = selectedCarIndex;
-            if (opponents.Count > 0) ConfigureRaceOpponents(5);
+            if (opponents.Count > 0) ConfigureRaceOpponents(0);
         }
         else if (arcadeRaceMode == ArcadeRaceMode.HeavyTruck)
         {
@@ -284,7 +284,7 @@ public sealed partial class NeonCircuitGame
         GUI.color = accent;
         GUI.Label(
             new Rect(panel.x + 18f, panel.y + 31f, panel.width - 36f, 38f),
-            IsDriftChallenge ? "НАБЕРИ 1500 ОЧКОВ ДРИФТА"
+            IsDriftChallenge ? "НАБЕРИ " + Mathf.RoundToInt(ArcadeDriftTarget) + " ОЧКОВ ДРИФТА"
                 : IsMotorcycleRace ? "МОТОГОНКА: VOLT BIKE X"
                 : "ГОНКА ТЯЖЁЛЫХ ГРУЗОВИКОВ",
             arcadeHeadingStyle);

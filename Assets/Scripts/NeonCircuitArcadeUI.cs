@@ -317,19 +317,23 @@ public sealed partial class NeonCircuitGame
         DrawSolidRect(new Rect(0f, screenHeight - 4f, screenWidth, 4f), ArcadeCyan);
     }
 
-    private void DrawArcadePanel(Rect rect, Color accent, Color secondary)
+    private void DrawArcadePanel(Rect rect, Color accent, Color secondary, bool drawTopBorder = true, bool drawInnerTopLine = true)
     {
         DrawSolidRect(new Rect(rect.x + 11f, rect.y + 13f, rect.width, rect.height), new Color(0f, 0f, 0f, 0.72f));
         DrawSolidRect(new Rect(rect.x - 6f, rect.y - 6f, rect.width + 12f, rect.height + 12f), new Color(accent.r, accent.g, accent.b, 0.2f));
         DrawSolidRect(rect, new Color(0.003f, 0.014f, 0.043f, 0.985f));
         DrawSolidRect(new Rect(rect.x + 7f, rect.y + 7f, rect.width - 14f, rect.height - 14f), new Color(0.012f, 0.036f, 0.075f, 0.96f));
-        DrawSolidRect(new Rect(rect.x, rect.y, rect.width, 5f), accent);
+        if (drawTopBorder)
+        {
+            DrawSolidRect(new Rect(rect.x, rect.y, rect.width, 5f), accent);
+        }
         DrawSolidRect(new Rect(rect.x, rect.y + rect.height - 5f, rect.width, 5f), secondary);
         DrawSolidRect(new Rect(rect.x, rect.y, 5f, rect.height), accent);
         DrawSolidRect(new Rect(rect.x + rect.width - 5f, rect.y, 5f, rect.height), secondary);
-        DrawSolidRect(new Rect(rect.x + 10f, rect.y + 10f, rect.width - 20f, 2f), new Color(accent.r, accent.g, accent.b, 0.35f));
-        DrawSolidRect(new Rect(rect.x + 11f, rect.y + 11f, 25f, 6f), Color.white);
-        DrawSolidRect(new Rect(rect.x + rect.width - 36f, rect.y + rect.height - 17f, 25f, 6f), Color.white);
+        if (drawInnerTopLine)
+        {
+            DrawSolidRect(new Rect(rect.x + 10f, rect.y + 10f, rect.width - 20f, 2f), new Color(accent.r, accent.g, accent.b, 0.35f));
+        }
         DrawSolidRect(new Rect(rect.x, rect.y, 18f, 18f), ArcadeInk);
         DrawSolidRect(new Rect(rect.x + rect.width - 18f, rect.y + rect.height - 18f, 18f, 18f), ArcadeInk);
         DrawSolidRect(new Rect(rect.x + 5f, rect.y + 16f, 4f, rect.height - 32f), new Color(accent.r, accent.g, accent.b, 0.34f));
@@ -602,7 +606,7 @@ public sealed partial class NeonCircuitGame
             GUI.Label(new Rect(fallbackX, 95f, 620f, 66f), "ВЫБЕРИТЕ РЕЖИМ", arcadeTitleStyle);
             if (DrawArcadeButton(new Rect(fallbackX, 175f, 620f, 72f), "01", "КАМПАНИЯ", "СЮЖЕТ / 8 ГЛАВ", ArcadeLime, mainMenuSelectedMode == 0)) ActivateMainMenuMode(0);
             if (DrawArcadeButton(new Rect(fallbackX, 257f, 620f, 72f), "02", "СВОБОДНАЯ ГОНКА", "ТРАССА / МАШИНА / ПОГОДА", ArcadePink, mainMenuSelectedMode == 1)) ActivateMainMenuMode(1);
-            if (DrawArcadeButton(new Rect(fallbackX, 339f, 620f, 72f), "03", "ДРИФТ-ИСПЫТАНИЕ", "1500 ОЧКОВ / DRIFT RX", ArcadeCyan, mainMenuSelectedMode == 2)) ActivateMainMenuMode(2);
+            if (DrawArcadeButton(new Rect(fallbackX, 339f, 620f, 72f), "03", "ДРИФТ-ИСПЫТАНИЕ", "3000 ОЧКОВ / DRIFT RX", ArcadeCyan, mainMenuSelectedMode == 2)) ActivateMainMenuMode(2);
             if (DrawArcadeButton(new Rect(fallbackX, 421f, 620f, 72f), "04", "ТЯЖЁЛЫЕ ГРУЗОВИКИ", "TITAN HAULER / ТЯЖЁЛАЯ ФИЗИКА", ArcadeYellow, mainMenuSelectedMode == 3)) ActivateMainMenuMode(3);
             if (DrawArcadeButton(new Rect(fallbackX, 503f, 620f, 72f), "05", "МОТОГОНКА", "VOLT BIKE X / ЛЁГКАЯ ФИЗИКА", ArcadeViolet, mainMenuSelectedMode == 4)) ActivateMainMenuMode(4);
             if (DrawArcadeButton(new Rect(fallbackX, 590f, 620f, 64f), "<", "НАЗАД", "ESC", ArcadeCyan, false)) CloseMainMenuModeSelection();
@@ -640,7 +644,7 @@ public sealed partial class NeonCircuitGame
         {
             ActivateMainMenuMode(1);
         }
-        else if (DrawMainMenuModeButton(driftButton, 2, "03", "ДРИФТ-ИСПЫТАНИЕ", "1500 ОЧКОВ  /  DRIFT RX", ArcadeCyan))
+        else if (DrawMainMenuModeButton(driftButton, 2, "03", "ДРИФТ-ИСПЫТАНИЕ", "3000 ОЧКОВ  /  DRIFT RX", ArcadeCyan))
         {
             ActivateMainMenuMode(2);
         }
@@ -667,7 +671,7 @@ public sealed partial class NeonCircuitGame
         DrawSolidRect(new Rect(selectorStatus.x, selectorStatus.y, 5f, selectorStatus.height), statusAccent);
         string status = mainMenuSelectedMode == 0
             ? "КАМПАНИЯ  " + CompletedStoryChapterCount() + " / " + StoryChapters.Length
-            : mainMenuSelectedMode == 2 ? "DRIFT RX  //  ЦЕЛЬ 1500"
+            : mainMenuSelectedMode == 2 ? "DRIFT RX  //  ЦЕЛЬ 3000"
             : mainMenuSelectedMode == 3 ? "TITAN HAULER  //  2700 KG"
             : mainMenuSelectedMode == 4 ? "VOLT BIKE X  //  620 KG"
             : ActiveTrack.ShortName + "  //  " + CarNames[selectedCarIndex];
@@ -748,7 +752,7 @@ public sealed partial class NeonCircuitGame
         DrawSolidRect(trackFooter, new Color(0.004f, 0.016f, 0.046f, 1f));
         DrawSolidRect(new Rect(trackFooter.x, trackFooter.y, trackFooter.width, Mathf.Max(2f, trackFooter.height * 0.04f)), accent);
         string mainText = mainMenuSelectedMode == 0 ? "КАМПАНИЯ"
-            : mainMenuSelectedMode == 2 ? "1500 DRIFT"
+            : mainMenuSelectedMode == 2 ? "3000 DRIFT"
             : mainMenuSelectedMode == 3 ? "HEAVY LEAGUE"
             : mainMenuSelectedMode == 4 ? "MOTO LEAGUE"
             : "3 LAPS";
@@ -1253,7 +1257,7 @@ public sealed partial class NeonCircuitGame
 
         float headerActionWidth = Mathf.Clamp(rightWidth * 0.48f, 205f, 252f);
         Rect coins = new Rect(contentX + contentWidth - headerActionWidth, topY, headerActionWidth, 40f);
-        DrawArcadePanel(coins, ArcadeYellow, ArcadeOrange);
+        DrawArcadePanel(coins, ArcadeYellow, ArcadeOrange, true, false);
         GUI.Label(new Rect(coins.x + 14f, coins.y + 5f, coins.width - 28f, 30f), this.coins + " COINS", arcadeCompactHeadingStyle);
         Rect back = new Rect(contentX + contentWidth - headerActionWidth, topY + 46f, headerActionWidth, 32f);
         if (DrawArcadeButton(back, "<", "НАЗАД", string.Empty, ArcadeCyan, false))

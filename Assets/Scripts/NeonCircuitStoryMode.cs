@@ -116,7 +116,7 @@ public sealed partial class NeonCircuitGame
         new StoryChapterDefinition(
             "ЛЕДЯНОЙ СЛЕД", "ПЕРЕХВАТ",
             "Украденный модуль спрятан в ледяных тоннелях. Сканер откроет его только после серии контролируемых заносов.",
-            "НАБЕРИ 1000 ОЧКОВ ДРИФТА И ФИНИШИРУЙ", 2, 2, "ДРИФТ-ИСПЫТАНИЕ", 3, 5, 350, 7, 0f,
+            "НАБЕРИ 1000 ОЧКОВ ДРИФТА И ФИНИШИРУЙ", 2, 2, "ДРИФТ-ИСПЫТАНИЕ", 3, 0, 350, 7, 0f,
             StoryMissionType.Drift, StoryVehicleType.Car, "DRIFT RX", 1000f,
             new[]
             {
@@ -286,7 +286,7 @@ public sealed partial class NeonCircuitGame
 
     private void ConfigureRaceOpponents(int rivalCount)
     {
-        int clamped = Mathf.Clamp(rivalCount, 1, opponents.Count);
+        int clamped = Mathf.Clamp(rivalCount, 0, opponents.Count);
         for (int i = 0; i < opponents.Count; i++)
         {
             if (opponents[i] != null)
@@ -370,7 +370,9 @@ public sealed partial class NeonCircuitGame
 
         if (vehicleType == StoryVehicleType.Motorcycle)
         {
-            playerScale = new Vector3(0.94f, 1.14f, 1f);
+            // Keep the root scale uniform so the top-down motorcycle sprite
+            // preserves its original proportions on the track.
+            playerScale = new Vector3(1.04f, 1.04f, 1f);
             colliderSize = new Vector2(0.55f, 1.55f);
             mass = 0.62f;
             linearDamping = 0.82f;
@@ -425,7 +427,7 @@ public sealed partial class NeonCircuitGame
                     specialVehicleSprite != null ? null : GetTrackBrokenCarVariant2Sprite(rivalCarIndex));
             }
             opponent.transform.localScale = vehicleType == StoryVehicleType.Motorcycle
-                ? new Vector3(0.94f, 1.14f, 1f)
+                ? new Vector3(1.04f, 1.04f, 1f)
                 : vehicleType == StoryVehicleType.Truck
                     ? new Vector3(1.18f, 1.18f, 1f)
                     : CarScales[rivalCarIndex];
