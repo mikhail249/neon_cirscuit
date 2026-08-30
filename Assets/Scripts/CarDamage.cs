@@ -33,6 +33,8 @@ public sealed class CarDamage : MonoBehaviour
     private Vector3 originalBodyLocalScale;
     private Vector3 originalBodyLocalPosition;
     private Quaternion originalBodyLocalRotation;
+    private Vector3 glassCrackLocalPosition = new Vector3(0f, 0.17f, 0f);
+    private float glassCrackScaleMultiplier = 1f;
     private readonly SpriteRenderer[] dentMarks = new SpriteRenderer[MaximumDentMarks];
     private float health = MaxHealth;
     private float lastHitTime = -10f;
@@ -146,6 +148,16 @@ public sealed class CarDamage : MonoBehaviour
         }
     }
 
+    public void ConfigureDamageOverlayLayout(Vector2 crackPosition, float crackScale)
+    {
+        glassCrackLocalPosition = new Vector3(crackPosition.x, crackPosition.y, 0f);
+        glassCrackScaleMultiplier = Mathf.Clamp(crackScale, 0.3f, 1.2f);
+        if (glassCrack != null)
+        {
+            glassCrack.transform.localPosition = glassCrackLocalPosition;
+        }
+    }
+
     private void CreateDamageVisuals(Sprite sprite, int sortingOrder)
     {
         CreateDamageClipMask(sprite, sortingOrder);
@@ -209,7 +221,7 @@ public sealed class CarDamage : MonoBehaviour
 
         GameObject crackObject = new GameObject("Cracked Glass");
         crackObject.transform.SetParent(transform);
-        crackObject.transform.localPosition = new Vector3(0f, 0.17f, 0f);
+        crackObject.transform.localPosition = glassCrackLocalPosition;
         crackObject.transform.localRotation = Quaternion.identity;
         crackObject.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         glassCrack = crackObject.AddComponent<SpriteRenderer>();
@@ -593,7 +605,7 @@ public sealed class CarDamage : MonoBehaviour
                 + (frontDent + leftDent + rightDent) * 1.8f);
             glassCrack.enabled = glassSeverity > 0.025f;
             glassCrack.color = new Color(0.76f, 0.96f, 1f, Mathf.Lerp(0.48f, 1f, glassSeverity));
-            float glassScale = Mathf.Lerp(0.46f, 0.78f, glassSeverity);
+            float glassScale = Mathf.Lerp(0.46f, 0.78f, glassSeverity) * glassCrackScaleMultiplier;
             glassCrack.transform.localScale = new Vector3(glassScale, glassScale, 1f);
             glassCrack.transform.localRotation = Quaternion.Euler(0f, 0f, (rightDent - leftDent) * 125f);
         }

@@ -394,13 +394,17 @@ public sealed partial class NeonCircuitGame
         DrawSolidRect(rect, fill);
         DrawSolidRect(new Rect(rect.x, rect.y, highlighted ? 7f : 3f, rect.height), accent);
         DrawSolidRect(new Rect(rect.x, rect.y, rect.width, 3f), accent);
-        DrawSolidRect(new Rect(rect.x + numberDivider, rect.y + 12f, 2f, rect.height - 24f), new Color(accent.r, accent.g, accent.b, 0.52f));
+        if (number != "<")
+        {
+            DrawSolidRect(new Rect(rect.x + numberDivider, rect.y + 12f, 2f, rect.height - 24f), new Color(accent.r, accent.g, accent.b, 0.52f));
+        }
 
         Color previous = GUI.color;
         GUI.color = accent;
         GUI.Label(new Rect(rect.x + 9f, rect.y + 8f, numberDivider - 15f, rect.height - 16f), number, compact ? arcadeCompactHeadingStyle : arcadeNumberStyle);
         GUI.color = Color.white;
-        GUI.Label(new Rect(rect.x + titleX, rect.y + 10f, rect.width - titleX - arrowReserve, 34f), title, compactTitle ? arcadeCompactHeadingStyle : arcadeHeadingStyle);
+        float titleY = rect.y + (number == "<" ? 4f : 10f);
+        GUI.Label(new Rect(rect.x + titleX, titleY, rect.width - titleX - arrowReserve, 34f), title, compactTitle ? arcadeCompactHeadingStyle : arcadeHeadingStyle);
         GUI.color = previous;
 
         if (!string.IsNullOrEmpty(subtitle))
@@ -704,14 +708,18 @@ public sealed partial class NeonCircuitGame
         float numberWidth = Mathf.Min(105f, rect.width * 0.22f);
         Rect numberRect = new Rect(rect.x + 8f, rect.y + 8f, numberWidth - 8f, rect.height - 16f);
         DrawSolidRect(numberRect, new Color(accent.r * 0.16f, accent.g * 0.16f, accent.b * 0.16f, 0.92f));
-        DrawSolidRect(new Rect(rect.x + numberWidth, rect.y + 12f, 2f, rect.height - 24f), new Color(accent.r, accent.g, accent.b, 0.62f));
+        if (number != "<")
+        {
+            DrawSolidRect(new Rect(rect.x + numberWidth, rect.y + 12f, 2f, rect.height - 24f), new Color(accent.r, accent.g, accent.b, 0.62f));
+        }
 
         Color previous = GUI.color;
         GUI.color = accent;
         GUI.Label(numberRect, number, arcadeTitleStyle);
         GUI.color = Color.white;
         float titleX = rect.x + numberWidth + 22f;
-        GUI.Label(new Rect(titleX, rect.y + rect.height * 0.16f, rect.width - numberWidth - 78f, rect.height * 0.42f), title, arcadeHeadingStyle);
+        float titleY = rect.y + rect.height * 0.16f - (number == "<" ? 6f : 0f);
+        GUI.Label(new Rect(titleX, titleY, rect.width - numberWidth - 78f, rect.height * 0.42f), title, arcadeHeadingStyle);
         GUI.color = previous;
         GUI.Label(new Rect(titleX + 2f, rect.y + rect.height * 0.61f, rect.width - numberWidth - 84f, rect.height * 0.2f), subtitle, arcadeMicroStyle);
         GUI.Label(new Rect(rect.xMax - 54f, rect.y + (rect.height - 34f) * 0.5f, 42f, 34f), highlighted ? ">>>" : ">", arcadeLabelStyle);
@@ -1174,7 +1182,8 @@ public sealed partial class NeonCircuitGame
             DrawSolidRect(new Rect(item.x, item.y, 3f, item.height), colors[i]);
             GUI.Label(new Rect(item.x + 9f, item.y + 5f, item.width - 62f, 18f), labels[i], arcadeMicroStyle);
             GUI.Label(new Rect(item.x + item.width - 50f, item.y + 4f, 43f, 20f), Mathf.RoundToInt(values[i] * 100f).ToString(), arcadeSmallStyle);
-            DrawArcadeSegments(new Rect(item.x + 9f, item.yMax - 17f, item.width - 18f, 9f), Mathf.Clamp01(values[i]), colors[i], 8);
+            float statRatio = values[i] / 1.2f;
+            DrawArcadeSegments(new Rect(item.x + 9f, item.yMax - 17f, item.width - 18f, 9f), statRatio, colors[i], 8);
         }
     }
 

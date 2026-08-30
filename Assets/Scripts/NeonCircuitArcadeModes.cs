@@ -125,6 +125,8 @@ public sealed partial class NeonCircuitGame
         {
             ConfigureRaceOpponents(opponents.Count);
         }
+
+        SetTrackObstaclesEnabled(!IsDriftChallenge);
     }
 
     private void PreparePendingArcadeRaceBeforeWorldBuild()
@@ -159,6 +161,7 @@ public sealed partial class NeonCircuitGame
         bool hadSpecialMode = arcadeRaceMode != ArcadeRaceMode.Standard;
         arcadeRaceMode = ArcadeRaceMode.Standard;
         pendingArcadeRaceMode = ArcadeRaceMode.Standard;
+        SetTrackObstaclesEnabled(true);
         if (opponents.Count > 0)
         {
             ConfigureRaceOpponents(opponents.Count);
@@ -208,7 +211,7 @@ public sealed partial class NeonCircuitGame
         }
 
         arcadeModeResolved = true;
-        arcadeFinishPosition = RacePosition();
+        arcadeFinishPosition = RecordedFinishPosition;
         if (IsDriftChallenge)
         {
             arcadeModeSucceeded = arcadeDriftScore >= ArcadeDriftTarget;

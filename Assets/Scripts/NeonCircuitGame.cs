@@ -119,6 +119,7 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
     private bool trackProgressInitialized;
     private bool raceStarted;
     private bool raceFinished;
+    private int recordedFinishPosition;
     private bool playerWrecked;
     private bool garageOpen;
     private bool mainMenuOpen = true;
@@ -517,6 +518,7 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
         CreateWeaponPickups();
         CreateRepairPickups();
         CreateRainPuddles();
+        SetTrackObstaclesEnabled(!IsDriftChallenge);
         CreateStartLine();
         CreateInfieldDecor();
     }
@@ -1184,6 +1186,18 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
         }
     }
 
+    private void SetTrackObstaclesEnabled(bool enabled)
+    {
+        for (int i = 0; i < trackObstacles.Count; i++)
+        {
+            TrackObstacle obstacle = trackObstacles[i];
+            if (obstacle != null && obstacle.gameObject.activeSelf != enabled)
+            {
+                obstacle.gameObject.SetActive(enabled);
+            }
+        }
+    }
+
     private bool TryFindSafePickupPlacement(ref float t, ref float lane)
     {
         float originalT = t;
@@ -1660,7 +1674,8 @@ opponents.Add(ai);
         GameObject root = new GameObject(objectName);
         root.transform.SetParent(transform);
         int safeCarIndex = Mathf.Clamp(carIndex, 0, CarNames.Length - 1);
-        Sprite carSprite = GetActiveStoryVehicleSprite() ?? GetTrackCarSprite(safeCarIndex);
+        Sprite specialVehicleSprite = GetActiveStoryVehicleSprite();
+        Sprite carSprite = specialVehicleSprite ?? GetTrackCarSprite(safeCarIndex);
         Color bodyLight = Color.Lerp(bodyColor, Color.white, 0.2f);
         Color bodyDark = Color.Lerp(bodyColor, Color.black, 0.42f);
         Color glass = new Color(0.035f, 0.12f, 0.17f);
@@ -1669,7 +1684,9 @@ opponents.Add(ai);
         {
             CreateVisual("Shadow", new Vector2(0.14f, -0.13f), new Vector2(1.14f, 2.02f), new Color(0f, 0f, 0f, 0.4f), sortingOrder - 3, 0f, root.transform, true, circleSprite);
             CreateVisual("Underglow", Vector2.zero, new Vector2(1.24f, 2.08f), new Color(bodyColor.r, bodyColor.g, bodyColor.b, 0.2f), sortingOrder - 2, 0f, root.transform, true, circleSprite);
-            Color spriteTint = Color.Lerp(Color.white, bodyColor, 0.72f);
+            Color spriteTint = specialVehicleSprite != null
+                ? Color.white
+                : Color.Lerp(Color.white, bodyColor, 0.72f);
             CreateVisual("Body", Vector2.zero, GetTrackCarVisualScale(carSprite), spriteTint, sortingOrder + 1, 0f, root.transform, true, carSprite);
             root.transform.localScale = CarScales[safeCarIndex];
             return root;
@@ -2818,6 +2835,8 @@ opponents.Add(ai);
 
             if (validLap)
             {
+                bool completesRace = completedLaps + 1 >= RaceLapTarget;
+                int finishPosition = completesRace ? RacePosition() : 0;
                 completedLaps++;
                 AddCoins(100);
                 float lapTime = raceTime - lapStartedAt;
@@ -2826,9 +2845,10 @@ opponents.Add(ai);
 
                 if (completedLaps >= RaceLapTarget)
                 {
+                    recordedFinishPosition = Mathf.Max(1, finishPosition);
                     raceFinished = true;
                     finishTime = raceTime;
-                    lastFinishReward = Mathf.Max(180, 600 - (RacePosition() - 1) * 90);
+                    lastFinishReward = Mathf.Max(180, 600 - (recordedFinishPosition - 1) * 90);
                     AddCoins(lastFinishReward);
                     player.SetFinished();
                     ResolveStoryRaceAtFinish();
@@ -2892,6 +2912,7 @@ public void HandlePlayerBroken()
         }
 
         playerWrecked = true;
+        recordedFinishPosition = RacePosition();
         raceFinished = true;
         finishTime = raceTime;
         lastFinishReward = 0;
@@ -2916,6 +2937,7 @@ private void RestartRace()
         bestLap = float.PositiveInfinity;
         finishTime = 0f;
         lastFinishReward = 0;
+        recordedFinishPosition = 0;
         countdown = 3.8f;
         raceStarted = false;
         raceFinished = false;
@@ -3146,6 +3168,11 @@ opponents[i].ResetRacer();
 
     private int RacePosition()
     {
+        if (raceFinished && recordedFinishPosition > 0)
+        {
+            return recordedFinishPosition;
+        }
+
         int position = 1;
         float progress = PlayerProgress;
         for (int i = 0; i < opponents.Count; i++)
@@ -3157,6 +3184,11 @@ opponents[i].ResetRacer();
         }
 
         return position;
+    }
+
+    private int RecordedFinishPosition
+    {
+        get { return recordedFinishPosition > 0 ? recordedFinishPosition : RacePosition(); }
     }
 
     private string FormatTime(float value)
@@ -4179,7 +4211,7 @@ private void DrawCarPreview(Rect rect, int carIndex)
             DrawMinimapMarker(pickupPoint, 3f, new Color(0.18f, 1f, 0.62f));
         }
 
-        for (int i = 0; i < minimapObstaclePoints.Count; i++)
+        for (int i = 0; !IsDriftChallenge && i < minimapObstaclePoints.Count; i++)
         {
             Vector2 obstaclePoint = MinimapPoint(minimapObstaclePoints[i], mapRect);
             DrawMinimapMarker(obstaclePoint, 10f, new Color(1f, 0.25f, 0.04f, 0.16f));

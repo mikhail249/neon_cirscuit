@@ -367,6 +367,8 @@ public sealed partial class NeonCircuitGame
         float mass = 1f;
         float linearDamping = 1.25f;
         float angularDamping = 4f;
+        Vector2 damageCrackPosition = new Vector2(0f, 0.17f);
+        float damageCrackScale = 1f;
 
         if (vehicleType == StoryVehicleType.Motorcycle)
         {
@@ -385,9 +387,15 @@ public sealed partial class NeonCircuitGame
             mass = 2.7f;
             linearDamping = 1.65f;
             angularDamping = 6.8f;
+            damageCrackPosition = new Vector2(0f, 0.54f);
+            damageCrackScale = 0.68f;
         }
 
         player.transform.localScale = playerScale;
+        if (playerDamage != null)
+        {
+            playerDamage.ConfigureDamageOverlayLayout(damageCrackPosition, damageCrackScale);
+        }
         BoxCollider2D playerCollider = player.GetComponent<BoxCollider2D>();
         if (playerCollider != null) playerCollider.size = colliderSize;
         Rigidbody2D playerBody = player.GetComponent<Rigidbody2D>();
@@ -412,6 +420,10 @@ public sealed partial class NeonCircuitGame
                 if (rivalRenderer != null)
                 {
                     rivalRenderer.sprite = rivalSprite;
+                    if (specialVehicleSprite != null)
+                    {
+                        rivalRenderer.color = Color.white;
+                    }
                 }
                 if (rivalSprite != null)
                 {
@@ -425,6 +437,7 @@ public sealed partial class NeonCircuitGame
                     rivalSprite,
                     specialVehicleSprite != null ? null : GetTrackBrokenCarSprite(rivalCarIndex),
                     specialVehicleSprite != null ? null : GetTrackBrokenCarVariant2Sprite(rivalCarIndex));
+                rivalDamage.ConfigureDamageOverlayLayout(damageCrackPosition, damageCrackScale);
             }
             opponent.transform.localScale = vehicleType == StoryVehicleType.Motorcycle
                 ? new Vector3(1.04f, 1.04f, 1f)
@@ -684,7 +697,7 @@ public sealed partial class NeonCircuitGame
         }
 
         StoryChapterDefinition chapter = ActiveStoryChapter;
-        storyFinishPosition = RacePosition();
+        storyFinishPosition = RecordedFinishPosition;
         bool positionPassed = storyFinishPosition <= chapter.MaximumPosition;
         bool timePassed = chapter.TimeLimit <= 0f || finishTime <= chapter.TimeLimit;
         bool specialPassed = chapter.MissionType == StoryMissionType.Drift
@@ -747,7 +760,7 @@ public sealed partial class NeonCircuitGame
 
         storyMissionResolved = true;
         storyMissionSucceeded = false;
-        storyFinishPosition = RacePosition();
+        storyFinishPosition = RecordedFinishPosition;
         storyResultMessage = reason;
     }
 

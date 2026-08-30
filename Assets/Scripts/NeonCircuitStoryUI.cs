@@ -225,9 +225,9 @@ public sealed partial class NeonCircuitGame
         Rect reward = new Rect(objective.xMax - 178f, objective.y + 10f, 162f, objective.height - 20f);
         DrawSolidRect(reward, new Color(0.025f, 0.019f, 0.002f, 0.9f));
         DrawSolidRect(new Rect(reward.x, reward.y, 4f, reward.height), ArcadeYellow);
-        GUI.Label(new Rect(reward.x + 11f, reward.y + 5f, reward.width - 18f, 18f), completed ? "НАГРАДА ПОЛУЧЕНА" : "НАГРАДА", arcadeMicroStyle);
+        GUI.Label(new Rect(reward.x + 14f, reward.y + 5f, reward.width - 26f, 18f), completed ? "НАГРАДА ПОЛУЧЕНА" : "НАГРАДА", arcadeMicroStyle);
         GUI.color = completed ? new Color(0.54f, 0.63f, 0.67f) : ArcadeYellow;
-        GUI.Label(new Rect(reward.x + 10f, reward.y + 25f, reward.width - 18f, reward.height - 28f), completed ? "REPLAY" : chapter.Reward + " COINS", arcadeHeadingStyle);
+        GUI.Label(new Rect(reward.x + 14f, reward.y + 23f, reward.width - 26f, reward.height - 26f), completed ? "REPLAY" : chapter.Reward + " COINS", arcadeCompactHeadingStyle);
         GUI.color = previous;
 
         float actionWidth = (rect.width - 38f) * 0.64f;
@@ -254,7 +254,7 @@ public sealed partial class NeonCircuitGame
         Rect preview = new Rect(rect.x + 10f, rect.y + 31f, rect.width - 20f, Mathf.Max(54f, rect.height - footerHeight - 38f));
         if (chapter.VehicleType == StoryVehicleType.Car || storyVehicleSheet == null)
         {
-            DrawCarPreview(preview, chapter.CarIndex);
+            DrawStoryCarPreview(preview, chapter.CarIndex);
         }
         else
         {
@@ -273,6 +273,42 @@ public sealed partial class NeonCircuitGame
         GUI.color = Color.white;
     }
 
+    private void DrawStoryCarPreview(Rect rect, int carIndex)
+    {
+        Sprite carSprite = GetTrackCarSprite(carIndex);
+        if (carSprite == null || carSprite.texture == null)
+        {
+            DrawCarPreview(rect, carIndex);
+            return;
+        }
+
+        Rect source = carSprite.textureRect;
+        float sourceAspect = source.width / Mathf.Max(1f, source.height);
+        float drawHeight = rect.height * 0.27f;
+        float drawWidth = drawHeight * sourceAspect;
+        float maxWidth = rect.width * 0.58f;
+        if (drawWidth > maxWidth)
+        {
+            drawWidth = maxWidth;
+            drawHeight = drawWidth / Mathf.Max(0.01f, sourceAspect);
+        }
+
+        Rect drawRect = new Rect(
+            rect.center.x - drawWidth * 0.5f,
+            rect.center.y - drawHeight * 0.5f,
+            drawWidth,
+            drawHeight);
+        Rect uv = new Rect(
+            source.x / carSprite.texture.width,
+            source.y / carSprite.texture.height,
+            source.width / carSprite.texture.width,
+            source.height / carSprite.texture.height);
+        Color previous = GUI.color;
+        GUI.color = Color.white;
+        GUI.DrawTextureWithTexCoords(drawRect, carSprite.texture, uv, true);
+        GUI.color = previous;
+    }
+
     private void DrawStoryVehiclePreview(Rect rect, StoryVehicleType vehicleType)
     {
         Rect uv = vehicleType == StoryVehicleType.Motorcycle
@@ -280,7 +316,7 @@ public sealed partial class NeonCircuitGame
             : new Rect(0.42f, 0.02f, 0.57f, 0.96f);
         float sourceAspect = (uv.width * storyVehicleSheet.width) / Mathf.Max(1f, uv.height * storyVehicleSheet.height);
         float maxWidth = rect.width * (vehicleType == StoryVehicleType.Motorcycle ? 0.62f : 0.9f);
-        float maxHeight = rect.height * 0.93f;
+        float maxHeight = rect.height * (vehicleType == StoryVehicleType.Motorcycle ? 0.24f : 0.93f);
         float drawHeight = maxHeight;
         float drawWidth = drawHeight * sourceAspect;
         if (drawWidth > maxWidth)
