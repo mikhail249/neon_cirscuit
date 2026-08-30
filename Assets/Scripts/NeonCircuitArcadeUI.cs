@@ -120,7 +120,11 @@ public sealed partial class NeonCircuitGame
                 Resources.Load<Texture2D>("UI/GarageCarRaptor4X"),
                 Resources.Load<Texture2D>("UI/GarageCarBlazeRS"),
                 Resources.Load<Texture2D>("UI/GarageCarNovaLM"),
-                Resources.Load<Texture2D>("UI/GarageCarZenithQ")
+                Resources.Load<Texture2D>("UI/GarageCarZenithQ"),
+                Resources.Load<Texture2D>("UI/GarageCarSignalGhost"),
+                Resources.Load<Texture2D>("UI/GarageCarMagmaRam"),
+                Resources.Load<Texture2D>("UI/GarageCarTempestXR"),
+                Resources.Load<Texture2D>("UI/GarageCarIkarusZero")
             };
         }
 
@@ -922,7 +926,7 @@ public sealed partial class NeonCircuitGame
                 specialVehicle.rect.y / carSprite.height,
                 specialVehicle.rect.width / carSprite.width,
                 specialVehicle.rect.height / carSprite.height)
-            : new Rect(0f, 0f, 1f, 1f);
+            : GetGarageCarTextureCoordinates(MainMenuModePreviewCarIndex);
 
         float time = Time.unscaledTime;
         float intro = MenuIntroProgress(0.08f, 0.78f);
@@ -981,6 +985,13 @@ public sealed partial class NeonCircuitGame
 
         int safeIndex = Mathf.Clamp(carIndex, 0, garageCarSprites.Length - 1);
         return garageCarSprites[safeIndex] != null ? garageCarSprites[safeIndex] : garageCarSprites[0];
+    }
+
+    private static Rect GetGarageCarTextureCoordinates(int carIndex)
+    {
+        return carIndex >= 9
+            ? new Rect(1f, 0f, -1f, 1f)
+            : new Rect(0f, 0f, 1f, 1f);
     }
 
     private Texture2D GetPaintedGarageCarSprite(int carIndex)
@@ -1148,7 +1159,7 @@ public sealed partial class NeonCircuitGame
 
             Rect spriteRect = new Rect(centerX - spriteWidth * 0.5f, centerY - spriteHeight * 0.5f, spriteWidth, spriteHeight);
             GUI.color = Color.white;
-            GUI.DrawTexture(spriteRect, carSprite, ScaleMode.StretchToFill, true);
+            GUI.DrawTextureWithTexCoords(spriteRect, carSprite, GetGarageCarTextureCoordinates(carIndex), true);
             GUI.color = previous;
         }
 
@@ -1224,11 +1235,17 @@ public sealed partial class NeonCircuitGame
                 Rect imageBounds = new Rect(item.x + 8f, item.y + 4f, item.width - 16f, item.height - 29f);
                 Color oldColor = GUI.color;
                 GUI.color = selected ? Color.white : new Color(0.62f, 0.75f, 0.82f, 0.82f);
-                GUI.DrawTexture(FitGarageCarTexture(imageBounds, sprite), sprite, ScaleMode.StretchToFill, true);
+                GUI.DrawTextureWithTexCoords(FitGarageCarTexture(imageBounds, sprite), sprite, GetGarageCarTextureCoordinates(i), true);
                 GUI.color = oldColor;
             }
 
-            GUI.Label(new Rect(item.x + 4f, item.yMax - 23f, item.width - 8f, 18f), IsCarOwned(i) ? CarNames[i] : "LOCKED  " + CarPrices[i], arcadeCenteredStyle);
+            int storyChapter = GetStoryCarUnlockChapter(i);
+            string carStatus = IsCarOwned(i)
+                ? CarNames[i]
+                : storyChapter >= 0
+                    ? "STORY  " + (storyChapter + 1).ToString("00")
+                    : "LOCKED  " + CarPrices[i];
+            GUI.Label(new Rect(item.x + 4f, item.yMax - 23f, item.width - 8f, 18f), carStatus, arcadeCenteredStyle);
             if (GUI.Button(item, GUIContent.none, GUIStyle.none)) garageCarIndex = i;
         }
     }
@@ -1300,14 +1317,24 @@ public sealed partial class NeonCircuitGame
         cursorY += statHeight + 9f;
 
         bool owned = IsCarOwned(garageCarIndex);
-        string action = selectedCarIndex == garageCarIndex ? "ВЫБРАНА" : owned ? "ВЫБРАТЬ" : "КУПИТЬ  " + CarPrices[garageCarIndex];
-        bool canAffordCar = owned || this.coins >= CarPrices[garageCarIndex];
-        Color vehicleActionAccent = owned ? ArcadeLime : canAffordCar ? ArcadeYellow : ArcadePink;
+        int storyUnlockChapter = GetStoryCarUnlockChapter(garageCarIndex);
+        bool storyLocked = storyUnlockChapter >= 0 && !owned;
+        string action = selectedCarIndex == garageCarIndex
+            ? "ВЫБРАНА"
+            : owned
+                ? "ВЫБРАТЬ"
+                : storyLocked
+                    ? "СЮЖЕТНАЯ НАГРАДА"
+                    : "КУПИТЬ  " + CarPrices[garageCarIndex];
+        bool canAffordCar = owned || (!storyLocked && this.coins >= CarPrices[garageCarIndex]);
+        Color vehicleActionAccent = owned ? ArcadeLime : storyLocked ? ArcadeCyan : canAffordCar ? ArcadeYellow : ArcadePink;
         string vehicleActionSubtitle = owned
             ? "READY TO RACE"
-            : canAffordCar
-                ? "PRICE  " + CarPrices[garageCarIndex] + " COINS"
-                : "НЕ ХВАТАЕТ  " + (CarPrices[garageCarIndex] - this.coins) + " COINS";
+            : storyLocked
+                ? "ПРОЙДИТЕ ГЛАВУ  " + (storyUnlockChapter + 1).ToString("00")
+                : canAffordCar
+                    ? "PRICE  " + CarPrices[garageCarIndex] + " COINS"
+                    : "НЕ ХВАТАЕТ  " + (CarPrices[garageCarIndex] - this.coins) + " COINS";
         float actionWidth = innerWidth * 0.62f;
         float actionX = innerX + (innerWidth - actionWidth) * 0.5f;
         bool canChooseCar = selectedCarIndex != garageCarIndex;
@@ -1350,9 +1377,13 @@ public sealed partial class NeonCircuitGame
         }
         else
         {
-            DrawArcadeUpgradeCard(new Rect(shopInnerX, cardsY, shopInnerWidth, cardHeight), 3, "01 WEAPON DAMAGE", "+16% DAMAGE  /  ALL WEAPONS", ArcadePink);
-            DrawArcadeUpgradeCard(new Rect(shopInnerX, cardsY + cardHeight + cardGap, shopInnerWidth, cardHeight), 4, "02 MAX AMMO", "+2 MAX AMMO  /  ALL WEAPONS", ArcadeLime);
-            DrawArcadeUpgradeCard(new Rect(shopInnerX, cardsY + (cardHeight + cardGap) * 2f, shopInnerWidth, cardHeight), 5, "03 FIRE RATE", "-8% FIRE COOLDOWN", ArcadeYellow);
+            float arsenalHeight = Mathf.Min(212f, (cardsBottom - cardsY) * 0.36f);
+            DrawStoryWeaponArsenal(new Rect(shopInnerX, cardsY, shopInnerWidth, arsenalHeight));
+            float weaponCardsY = cardsY + arsenalHeight + cardGap;
+            float weaponCardHeight = (cardsBottom - weaponCardsY - cardGap * 2f) / 3f;
+            DrawArcadeUpgradeCard(new Rect(shopInnerX, weaponCardsY, shopInnerWidth, weaponCardHeight), 3, "01 WEAPON DAMAGE", "+16% DAMAGE  /  ALL WEAPONS", ArcadePink);
+            DrawArcadeUpgradeCard(new Rect(shopInnerX, weaponCardsY + weaponCardHeight + cardGap, shopInnerWidth, weaponCardHeight), 4, "02 MAX AMMO", "+2 MAX AMMO  /  ALL WEAPONS", ArcadeLime);
+            DrawArcadeUpgradeCard(new Rect(shopInnerX, weaponCardsY + (weaponCardHeight + cardGap) * 2f, shopInnerWidth, weaponCardHeight), 5, "03 FIRE RATE", "-8% FIRE COOLDOWN", ArcadeYellow);
         }
 
         if (Time.unscaledTime < garageMessageUntil)

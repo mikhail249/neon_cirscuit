@@ -194,7 +194,7 @@ public sealed partial class NeonCircuitGame
 
         float actionHeight = Mathf.Clamp(rect.height * 0.135f, 56f, 72f);
         float actionY = rect.yMax - actionHeight - 14f;
-        float objectiveHeight = Mathf.Clamp(rect.height * 0.19f, 78f, 100f);
+        float objectiveHeight = Mathf.Clamp(rect.height * 0.22f, 104f, 120f);
         Rect objective = new Rect(rect.x + 14f, actionY - objectiveHeight - 10f, rect.width - 28f, objectiveHeight);
         float upperTop = titleBand.yMax + 10f;
         float upperHeight = Mathf.Max(130f, objective.y - upperTop - 10f);
@@ -218,17 +218,13 @@ public sealed partial class NeonCircuitGame
         DrawSolidRect(objective, new Color(accent.r * 0.16f, accent.g * 0.11f, accent.b * 0.13f, 0.98f));
         DrawSolidRect(new Rect(objective.x, objective.y, 8f, objective.height), accent);
         DrawSolidRect(new Rect(objective.x, objective.y, objective.width, 3f), ArcadeYellow);
-        GUI.Label(new Rect(objective.x + 18f, objective.y + 9f, 170f, 18f), "ЦЕЛЬ МИССИИ", arcadeMicroStyle);
+        float rewardWidth = Mathf.Clamp(objective.width * 0.3f, 218f, 292f);
+        Rect reward = new Rect(objective.xMax - rewardWidth - 14f, objective.y + 9f, rewardWidth, objective.height - 18f);
+        GUI.Label(new Rect(objective.x + 18f, objective.y + 9f, reward.x - objective.x - 30f, 18f), "ЦЕЛЬ МИССИИ", arcadeMicroStyle);
         GUI.color = accent;
-        GUI.Label(new Rect(objective.x + 18f, objective.y + 27f, objective.width - 220f, objective.height - 29f), chapter.Objective, storyObjectiveStyle);
+        GUI.Label(new Rect(objective.x + 18f, objective.y + 27f, reward.x - objective.x - 32f, objective.height - 31f), chapter.Objective, storyObjectiveStyle);
         GUI.color = previous;
-        Rect reward = new Rect(objective.xMax - 178f, objective.y + 10f, 162f, objective.height - 20f);
-        DrawSolidRect(reward, new Color(0.025f, 0.019f, 0.002f, 0.9f));
-        DrawSolidRect(new Rect(reward.x, reward.y, 4f, reward.height), ArcadeYellow);
-        GUI.Label(new Rect(reward.x + 14f, reward.y + 5f, reward.width - 26f, 18f), completed ? "НАГРАДА ПОЛУЧЕНА" : "НАГРАДА", arcadeMicroStyle);
-        GUI.color = completed ? new Color(0.54f, 0.63f, 0.67f) : ArcadeYellow;
-        GUI.Label(new Rect(reward.x + 14f, reward.y + 23f, reward.width - 26f, reward.height - 26f), completed ? "REPLAY" : chapter.Reward + " COINS", arcadeCompactHeadingStyle);
-        GUI.color = previous;
+        DrawStoryMissionRewardCard(reward, storySelectedChapter, chapter.Reward, storySelectedChapter <= storyUnlockedChapter, completed);
 
         float actionWidth = (rect.width - 38f) * 0.64f;
         if (DrawArcadeButton(new Rect(rect.x + 14f, actionY, actionWidth, actionHeight), "GO", "НАЧАТЬ МИССИЮ", track.ShortName + "  //  " + chapter.VehicleName, accent, true))
@@ -240,6 +236,53 @@ public sealed partial class NeonCircuitGame
         {
             CloseStoryMode();
         }
+    }
+
+    private void DrawStoryMissionRewardCard(Rect rect, int chapterIndex, int coinReward, bool chapterUnlocked, bool completed)
+    {
+        Color rewardAccent = GetStoryRewardColor(chapterIndex);
+        bool rewardOwned = IsStoryChapterRewardOwned(chapterIndex);
+        string state = rewardOwned || completed
+            ? "ПОЛУЧЕНО"
+            : chapterUnlocked
+                ? "ОТКРОЕТСЯ ПОСЛЕ МИССИИ"
+                : "ЗАКРЫТО";
+        Color muted = new Color(0.54f, 0.63f, 0.67f);
+        Color contentColor = rewardOwned || completed ? muted : rewardAccent;
+
+        DrawSolidRect(new Rect(rect.x + 4f, rect.y + 4f, rect.width, rect.height), new Color(0f, 0f, 0f, 0.5f));
+        DrawSolidRect(rect, new Color(0.003f, 0.012f, 0.035f, 0.96f));
+        DrawSolidRect(new Rect(rect.x, rect.y, 5f, rect.height), rewardAccent);
+        DrawSolidRect(new Rect(rect.x, rect.y, rect.width, 2f), ArcadeYellow);
+
+        GUIStyle stateStyle = new GUIStyle(arcadeMicroStyle)
+        {
+            fontSize = 9,
+            clipping = TextClipping.Clip
+        };
+        GUIStyle rewardNameStyle = new GUIStyle(arcadeSmallStyle)
+        {
+            fontSize = 14,
+            fontStyle = FontStyle.Bold,
+            clipping = TextClipping.Clip,
+            wordWrap = false
+        };
+        GUIStyle rewardDetailStyle = new GUIStyle(arcadeMicroStyle)
+        {
+            fontSize = 9,
+            clipping = TextClipping.Clip,
+            wordWrap = false
+        };
+
+        GUI.Label(new Rect(rect.x + 14f, rect.y + 5f, rect.width - 27f, 14f), "НАГРАДА  //  " + state, stateStyle);
+        GUI.color = rewardOwned || completed ? muted : ArcadeYellow;
+        GUI.Label(new Rect(rect.x + 14f, rect.y + 20f, rect.width - 27f, 20f), "+" + coinReward + " COINS", rewardNameStyle);
+        GUI.color = Color.white;
+        DrawSolidRect(new Rect(rect.x + 14f, rect.y + 42f, rect.width - 27f, 1f), new Color(rewardAccent.r, rewardAccent.g, rewardAccent.b, 0.45f));
+        GUI.color = contentColor;
+        GUI.Label(new Rect(rect.x + 14f, rect.y + 46f, rect.width - 27f, 19f), GetStoryRewardTitle(chapterIndex), rewardNameStyle);
+        GUI.Label(new Rect(rect.x + 14f, rect.y + 66f, rect.width - 27f, Mathf.Max(13f, rect.height - 70f)), GetStoryRewardDetail(chapterIndex), rewardDetailStyle);
+        GUI.color = Color.white;
     }
 
     private void DrawStoryVehicleShowcase(Rect rect, StoryChapterDefinition chapter, Color accent)
@@ -507,13 +550,15 @@ public sealed partial class NeonCircuitGame
                 : Mathf.Max(1, storyFinishPosition) + " / " + (ActiveOpponentCount + 1);
         DrawArcadeMetric(new Rect(panel.x + 28f, metricY, metricWidth, 104f), firstMetricLabel, firstMetricValue, ArcadeCyan);
         DrawArcadeMetric(new Rect(panel.x + 28f + metricWidth + metricGap, metricY, metricWidth, 104f), "TOTAL TIME", FormatTime(finishTime), resultColor);
-        DrawArcadeMetric(new Rect(panel.x + 28f + (metricWidth + metricGap) * 2f, metricY, metricWidth, 104f), "STORY BONUS", storyEarnedReward + " COINS", ArcadeYellow);
+        DrawArcadeMetric(new Rect(panel.x + 28f + (metricWidth + metricGap) * 2f, metricY, metricWidth, 104f), "COIN REWARD", "+" + storyEarnedReward + " COINS", ArcadeYellow);
+
+        DrawStoryFinishRewardBand(new Rect(panel.x + 28f, panel.y + 286f, panel.width - 56f, 48f));
 
         string primaryTitle = storyMissionSucceeded
             ? storySelectedChapter < StoryChapters.Length - 1 ? "ПРОДОЛЖИТЬ ИСТОРИЮ" : "ЭПИЛОГ"
             : "ПОВТОРИТЬ";
         string primarySubtitle = storyMissionSucceeded ? "AFTER-RACE TRANSMISSION" : "RESTART MISSION";
-        if (DrawArcadeButton(new Rect(panel.x + 28f, panel.y + 308f, 400f, 92f), "01", primaryTitle, primarySubtitle, resultColor, true))
+        if (DrawArcadeButton(new Rect(panel.x + 28f, panel.y + 346f, 400f, 80f), "01", primaryTitle, primarySubtitle, resultColor, true))
         {
             if (storyMissionSucceeded)
             {
@@ -525,18 +570,69 @@ public sealed partial class NeonCircuitGame
             }
         }
 
-        if (DrawArcadeButton(new Rect(panel.x + 452f, panel.y + 308f, 400f, 92f), "02", "ГАРАЖ", "UPGRADE VEHICLE", ArcadeCyan, false))
+        if (DrawArcadeButton(new Rect(panel.x + 452f, panel.y + 346f, 400f, 80f), "02", "ГАРАЖ", "UPGRADE VEHICLE", ArcadeCyan, false))
         {
             garageOpen = true;
             garageCarIndex = selectedCarIndex;
             Time.timeScale = 0f;
         }
 
-        if (DrawArcadeButton(new Rect(panel.x + 240f, panel.y + 430f, 400f, 76f), "<", "ВЫБОР ГЛАВ", "ESC  /  STORY ARCHIVE", ArcadeYellow, false))
+        if (DrawArcadeButton(new Rect(panel.x + 240f, panel.y + 440f, 400f, 68f), "<", "ВЫБОР ГЛАВ", "ESC  /  STORY ARCHIVE", ArcadeYellow, false))
         {
             OpenMainMenu();
         }
 
         GUI.Label(new Rect(panel.x + 28f, panel.y + 526f, panel.width - 56f, 20f), storyMissionSucceeded ? "PROGRESS SAVED  //  NIGHT LEAGUE SIGNAL RESTORED" : ActiveStoryChapter.Objective, arcadeCenteredStyle);
+    }
+
+    private void DrawStoryFinishRewardBand(Rect rect)
+    {
+        int chapterIndex = storySelectedChapter;
+        bool rewardOwned = IsStoryChapterRewardOwned(chapterIndex);
+        Color rewardAccent = GetStoryRewardColor(chapterIndex);
+        string state = rewardOwned
+            ? "ПОЛУЧЕНО"
+            : storyMissionSucceeded
+                ? "РАЗБЛОКИРОВАНО"
+                : "ЗАБЛОКИРОВАНО";
+
+        DrawSolidRect(new Rect(rect.x + 4f, rect.y + 4f, rect.width, rect.height), new Color(0f, 0f, 0f, 0.5f));
+        DrawSolidRect(rect, new Color(0.003f, 0.012f, 0.035f, 0.97f));
+        DrawSolidRect(new Rect(rect.x, rect.y, 6f, rect.height), rewardAccent);
+        DrawSolidRect(new Rect(rect.x, rect.y, rect.width, 2f), new Color(rewardAccent.r, rewardAccent.g, rewardAccent.b, 0.75f));
+
+        GUIStyle stateStyle = new GUIStyle(arcadeMicroStyle)
+        {
+            fontSize = 10,
+            clipping = TextClipping.Clip
+        };
+        GUIStyle nameStyle = new GUIStyle(arcadeSmallStyle)
+        {
+            fontSize = 16,
+            fontStyle = FontStyle.Bold,
+            clipping = TextClipping.Clip,
+            wordWrap = false
+        };
+        GUIStyle detailStyle = new GUIStyle(arcadeMicroStyle)
+        {
+            fontSize = 10,
+            clipping = TextClipping.Clip,
+            wordWrap = false
+        };
+
+        float stateWidth = Mathf.Clamp(rect.width * 0.25f, 170f, 205f);
+        float nameWidth = Mathf.Clamp(rect.width * 0.31f, 210f, 255f);
+        GUI.Label(new Rect(rect.x + 16f, rect.y + 7f, stateWidth - 20f, 14f), "УНИКАЛЬНАЯ НАГРАДА", stateStyle);
+        Color previous = GUI.color;
+        GUI.color = rewardOwned || storyMissionSucceeded ? rewardAccent : new Color(0.56f, 0.62f, 0.67f);
+        GUI.Label(new Rect(rect.x + 16f, rect.y + 23f, stateWidth - 20f, 17f), state, stateStyle);
+        GUI.Label(new Rect(rect.x + stateWidth, rect.y + 6f, nameWidth, 22f), GetStoryRewardTitle(chapterIndex), nameStyle);
+        GUI.color = previous;
+        GUI.Label(new Rect(rect.x + stateWidth, rect.y + 28f, nameWidth, 14f), "STORY ITEM  //  CHAPTER " + (chapterIndex + 1).ToString("00"), detailStyle);
+        DrawSolidRect(new Rect(rect.x + stateWidth + nameWidth + 10f, rect.y + 8f, 2f, rect.height - 16f), new Color(rewardAccent.r, rewardAccent.g, rewardAccent.b, 0.48f));
+        GUI.Label(
+            new Rect(rect.x + stateWidth + nameWidth + 22f, rect.y + 7f, rect.width - stateWidth - nameWidth - 34f, rect.height - 14f),
+            GetStoryRewardDetail(chapterIndex),
+            detailStyle);
     }
 }

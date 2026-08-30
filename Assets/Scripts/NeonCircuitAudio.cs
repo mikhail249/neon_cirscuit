@@ -20,6 +20,10 @@ public sealed partial class NeonCircuitGame
     private AudioClip repairClip;
     private AudioClip rocketClip;
     private AudioClip plasmaClip;
+    private AudioClip echoArcClip;
+    private AudioClip orbitMineClip;
+    private AudioClip icarLanceClip;
+    private AudioClip phantomSwarmClip;
     private AudioClip finishClip;
     private AudioClip wreckClip;
     private AudioClip puddleClip;
@@ -49,6 +53,10 @@ public sealed partial class NeonCircuitGame
         repairClip = CreateSweepClip("Repair Pickup", 310f, 740f, 0.22f, 0.38f);
         rocketClip = CreateSweepClip("Rocket Fire", 150f, 72f, 0.18f, 0.5f);
         plasmaClip = CreateSweepClip("Plasma Fire", 920f, 520f, 0.1f, 0.36f);
+        echoArcClip = CreateSweepClip("Echo Arc Fire", 1460f, 410f, 0.2f, 0.4f);
+        orbitMineClip = CreateSweepClip("Orbital Mine Deploy", 210f, 96f, 0.28f, 0.46f);
+        icarLanceClip = CreateSweepClip("Icar Lance Fire", 360f, 1720f, 0.24f, 0.46f);
+        phantomSwarmClip = CreateSweepClip("Phantom Swarm Deploy", 680f, 1380f, 0.38f, 0.38f);
         finishClip = CreateSweepClip("Finish", 440f, 1320f, 0.55f, 0.42f);
         wreckClip = CreateSweepClip("Vehicle Wrecked", 190f, 48f, 0.48f, 0.52f);
         puddleClip = CreateSweepClip("Puddle Splash", 290f, 72f, 0.2f, 0.36f);
@@ -309,7 +317,29 @@ public sealed partial class NeonCircuitGame
     {
         if (raceSfxSource == null) return;
         raceSfxSource.pitch = 1f;
-        raceSfxSource.PlayOneShot(weaponType == CarWeaponType.PlasmaBlaster ? plasmaClip : rocketClip, 0.86f);
+        AudioClip clip;
+        switch (weaponType)
+        {
+            case CarWeaponType.PlasmaBlaster:
+                clip = plasmaClip;
+                break;
+            case CarWeaponType.EchoArc:
+                clip = echoArcClip;
+                break;
+            case CarWeaponType.OrbitMine:
+                clip = orbitMineClip;
+                break;
+            case CarWeaponType.IcarLance:
+                clip = icarLanceClip;
+                break;
+            case CarWeaponType.PhantomSwarm:
+                clip = phantomSwarmClip;
+                break;
+            default:
+                clip = rocketClip;
+                break;
+        }
+        raceSfxSource.PlayOneShot(clip, 0.86f);
     }
 
     public void PlayPuddleSfx(float strength)

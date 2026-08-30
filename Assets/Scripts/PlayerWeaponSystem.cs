@@ -7,7 +7,11 @@ using UnityEngine.InputSystem;
 public enum CarWeaponType
 {
     NeonRocket,
-    PlasmaBlaster
+    PlasmaBlaster,
+    EchoArc,
+    OrbitMine,
+    IcarLance,
+    PhantomSwarm
 }
 
 public sealed class PlayerWeaponSystem : MonoBehaviour
@@ -15,6 +19,10 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
     private const int MaximumAmmo = 9;
     private const float RocketFireCooldown = 0.42f;
     private const float PlasmaFireCooldown = 0.2f;
+    private const float EchoArcFireCooldown = 0.72f;
+    private const float OrbitMineFireCooldown = 1.15f;
+    private const float IcarLanceFireCooldown = 0.9f;
+    private const float PhantomSwarmFireCooldown = 4.8f;
 
     private NeonCircuitGame game;
     private Rigidbody2D body;
@@ -31,7 +39,30 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
     public int MaxAmmo { get { return playerControlled && game != null ? game.PlayerWeaponMaxAmmo : MaximumAmmo; } }
     public float DamageMultiplier { get { return playerControlled && game != null ? game.PlayerWeaponDamageMultiplier : 1f; } }
     public CarWeaponType ActiveWeapon { get { return activeWeapon; } }
-    public string ActiveWeaponName { get { return activeWeapon == CarWeaponType.PlasmaBlaster ? "ПЛАЗМА-БЛАСТЕР" : "НЕОН-РАКЕТЫ"; } }
+    public string ActiveWeaponName
+    {
+        get
+        {
+            switch (activeWeapon)
+            {
+                case CarWeaponType.PlasmaBlaster: return "ПЛАЗМА-БЛАСТЕР";
+                case CarWeaponType.EchoArc: return "ЭХО-ДУГА";
+                case CarWeaponType.OrbitMine: return "ОРБИТАЛЬНАЯ МИНА";
+                case CarWeaponType.IcarLance: return "КОПЬЁ ИКАРА";
+                case CarWeaponType.PhantomSwarm: return "РОЙ ФАНТОМОВ";
+                default: return "НЕОН-РАКЕТЫ";
+            }
+        }
+    }
+    public int ActiveWeaponAmmoCost { get { return GetAmmoCost(activeWeapon); } }
+    public bool CanFire
+    {
+        get
+        {
+            CarDamage damage = GetComponent<CarDamage>();
+            return ammo >= ActiveWeaponAmmoCost && Time.time >= nextFireTime && damage != null && !damage.IsBroken;
+        }
+    }
     public bool IsPlayerControlled { get { return playerControlled; } }
     public bool PickupFlashActive { get { return Time.unscaledTime < pickupFlashUntil; } }
 
@@ -47,6 +78,9 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
         pixelSprite = projectileSprite;
         circleSprite = projectileCircleSprite;
         playerControlled = usePlayerInput;
+        activeWeapon = playerControlled && game != null
+            ? game.SelectedWeaponType
+            : CarWeaponType.NeonRocket;
     }
 
     private void Update()
@@ -58,9 +92,7 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
 
         if (SwitchWeaponPressed())
         {
-            activeWeapon = activeWeapon == CarWeaponType.NeonRocket
-                ? CarWeaponType.PlasmaBlaster
-                : CarWeaponType.NeonRocket;
+            activeWeapon = game.GetNextUnlockedWeapon(activeWeapon);
         }
 
         if (FirePressed())
@@ -89,7 +121,7 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
     public bool TryFire(Transform preferredTarget = null)
     {
         CarDamage damage = GetComponent<CarDamage>();
-        if (ammo <= 0 || Time.time < nextFireTime || damage == null || damage.IsBroken)
+        if (Time.time < nextFireTime || damage == null || damage.IsBroken)
         {
             return false;
         }
@@ -101,16 +133,35 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
             weaponToFire = targetDistance <= 9f ? CarWeaponType.PlasmaBlaster : CarWeaponType.NeonRocket;
         }
 
-        ammo--;
-        float cooldownMultiplier = playerControlled && game != null ? game.PlayerWeaponCooldownMultiplier : 1f;
-        nextFireTime = Time.time + (weaponToFire == CarWeaponType.PlasmaBlaster ? PlasmaFireCooldown : RocketFireCooldown) * cooldownMultiplier;
-        if (weaponToFire == CarWeaponType.PlasmaBlaster)
+        int ammoCost = GetAmmoCost(weaponToFire);
+        if (ammo < ammoCost)
         {
-            CreatePlasmaBolt();
+            return false;
         }
-        else
+
+        ammo -= ammoCost;
+        float cooldownMultiplier = playerControlled && game != null ? game.PlayerWeaponCooldownMultiplier : 1f;
+        nextFireTime = Time.time + GetFireCooldown(weaponToFire) * cooldownMultiplier;
+        switch (weaponToFire)
         {
-            CreateRocket();
+            case CarWeaponType.PlasmaBlaster:
+                CreatePlasmaBolt();
+                break;
+            case CarWeaponType.EchoArc:
+                CreateEchoArc();
+                break;
+            case CarWeaponType.OrbitMine:
+                CreateOrbitMine();
+                break;
+            case CarWeaponType.IcarLance:
+                CreateIcarLance();
+                break;
+            case CarWeaponType.PhantomSwarm:
+                CreatePhantomSwarm();
+                break;
+            default:
+                CreateRocket();
+                break;
         }
 
         if (playerControlled && game != null)
@@ -124,12 +175,14 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
     public void ResetWeapon()
     {
         ammo = 0;
-        activeWeapon = CarWeaponType.NeonRocket;
+        activeWeapon = playerControlled && game != null
+            ? game.SelectedWeaponType
+            : CarWeaponType.NeonRocket;
         nextFireTime = 0f;
         nextPickupTime = 0f;
         pickupFlashUntil = 0f;
 
-        NeonRocket[] rockets = FindObjectsByType<NeonRocket>(FindObjectsSortMode.None);
+        NeonRocket[] rockets = FindObjectsByType<NeonRocket>();
         for (int i = 0; i < rockets.Length; i++)
         {
             if (rockets[i].IsOwnedBy(gameObject))
@@ -138,7 +191,7 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
             }
         }
 
-        NeonPlasmaBolt[] plasmaBolts = FindObjectsByType<NeonPlasmaBolt>(FindObjectsSortMode.None);
+        NeonPlasmaBolt[] plasmaBolts = FindObjectsByType<NeonPlasmaBolt>();
         for (int i = 0; i < plasmaBolts.Length; i++)
         {
             if (plasmaBolts[i].IsOwnedBy(gameObject))
@@ -146,6 +199,21 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
                 Destroy(plasmaBolts[i].gameObject);
             }
         }
+
+        DestroyOwnedEffects(FindObjectsByType<NeonEchoArc>());
+        DestroyOwnedEffects(FindObjectsByType<NeonOrbitMine>());
+        DestroyOwnedEffects(FindObjectsByType<NeonIcarLance>());
+        DestroyOwnedEffects(FindObjectsByType<NeonPhantomSwarm>());
+    }
+
+    public void EquipWeapon(CarWeaponType weaponType)
+    {
+        if (!playerControlled || game == null || !game.IsWeaponUnlocked(weaponType))
+        {
+            return;
+        }
+
+        activeWeapon = weaponType;
     }
 
     private void CreateRocket()
@@ -204,6 +272,87 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
         NeonPlasmaBolt bolt = boltObject.AddComponent<NeonPlasmaBolt>();
         Vector2 launchVelocity = (Vector2)transform.up * 30f + body.linearVelocity * 0.18f;
         bolt.Initialize(gameObject, launchVelocity, pixelSprite, circleSprite, DamageMultiplier);
+    }
+
+    private void CreateEchoArc()
+    {
+        GameObject arcObject = new GameObject("Player Echo Arc");
+        arcObject.transform.SetParent(game.transform);
+        NeonEchoArc arc = arcObject.AddComponent<NeonEchoArc>();
+        arc.Initialize(gameObject, transform.position + transform.up * 0.72f, transform.up, pixelSprite, circleSprite, DamageMultiplier);
+    }
+
+    private void CreateOrbitMine()
+    {
+        GameObject mineObject = new GameObject("Player Orbital Mine");
+        mineObject.transform.SetParent(game.transform);
+        mineObject.transform.position = transform.position - transform.up * 1.38f;
+        mineObject.transform.rotation = transform.rotation;
+        NeonOrbitMine mine = mineObject.AddComponent<NeonOrbitMine>();
+        mine.Initialize(gameObject, body != null ? body.linearVelocity * 0.18f : Vector2.zero, pixelSprite, circleSprite, DamageMultiplier);
+    }
+
+    private void CreateIcarLance()
+    {
+        GameObject lanceObject = new GameObject("Player Icar Lance");
+        lanceObject.transform.SetParent(game.transform);
+        NeonIcarLance lance = lanceObject.AddComponent<NeonIcarLance>();
+        lance.Initialize(gameObject, transform.position + transform.up * 0.82f, transform.up, pixelSprite, circleSprite, DamageMultiplier);
+    }
+
+    private void CreatePhantomSwarm()
+    {
+        GameObject swarmObject = new GameObject("Player Phantom Swarm");
+        swarmObject.transform.SetParent(game.transform);
+        NeonPhantomSwarm swarm = swarmObject.AddComponent<NeonPhantomSwarm>();
+        swarm.Initialize(gameObject, pixelSprite, circleSprite, DamageMultiplier);
+    }
+
+    private static int GetAmmoCost(CarWeaponType weaponType)
+    {
+        switch (weaponType)
+        {
+            case CarWeaponType.OrbitMine: return 2;
+            case CarWeaponType.IcarLance: return 3;
+            case CarWeaponType.PhantomSwarm: return 2;
+            default: return 1;
+        }
+    }
+
+    private static float GetFireCooldown(CarWeaponType weaponType)
+    {
+        switch (weaponType)
+        {
+            case CarWeaponType.PlasmaBlaster: return PlasmaFireCooldown;
+            case CarWeaponType.EchoArc: return EchoArcFireCooldown;
+            case CarWeaponType.OrbitMine: return OrbitMineFireCooldown;
+            case CarWeaponType.IcarLance: return IcarLanceFireCooldown;
+            case CarWeaponType.PhantomSwarm: return PhantomSwarmFireCooldown;
+            default: return RocketFireCooldown;
+        }
+    }
+
+    private void DestroyOwnedEffects<T>(T[] effects) where T : Component
+    {
+        for (int i = 0; i < effects.Length; i++)
+        {
+            Component effect = effects[i];
+            if (effect == null)
+            {
+                continue;
+            }
+
+            bool owned = false;
+            if (effect is NeonEchoArc arc) owned = arc.IsOwnedBy(gameObject);
+            else if (effect is NeonOrbitMine mine) owned = mine.IsOwnedBy(gameObject);
+            else if (effect is NeonIcarLance lance) owned = lance.IsOwnedBy(gameObject);
+            else if (effect is NeonPhantomSwarm swarm) owned = swarm.IsOwnedBy(gameObject);
+
+            if (owned)
+            {
+                Destroy(effect.gameObject);
+            }
+        }
     }
 
     private bool FirePressed()

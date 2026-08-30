@@ -508,6 +508,7 @@ public sealed partial class NeonCircuitGame
         {
             selectedCarIndex = Mathf.Clamp(storyReturnCarIndex, 0, CarNames.Length - 1);
             garageCarIndex = selectedCarIndex;
+            PlayerPrefs.SetInt(SelectedCarKey, selectedCarIndex);
             ApplySelectedCarVisuals();
         }
 
@@ -730,6 +731,7 @@ public sealed partial class NeonCircuitGame
 
         bool firstCompletion = !IsStoryChapterCompleted(storySelectedChapter);
         PlayerPrefs.SetInt(StoryCompletedPrefix + storySelectedChapter, 1);
+        bool receivedUniqueReward = GrantStoryChapterUnlock(storySelectedChapter);
         if (storySelectedChapter < StoryChapters.Length - 1)
         {
             storyUnlockedChapter = Mathf.Max(storyUnlockedChapter, storySelectedChapter + 1);
@@ -738,14 +740,14 @@ public sealed partial class NeonCircuitGame
 
         storyEarnedReward = firstCompletion ? chapter.Reward : 0;
         storyResultMessage = firstCompletion
-            ? "ГЛАВА ПРОЙДЕНА  /  НОВАЯ МИССИЯ РАЗБЛОКИРОВАНА"
+            ? "ГЛАВА ПРОЙДЕНА  /  " + GetStoryRewardTitle(storySelectedChapter) + " ОТКРЫТО"
             : "ГЛАВА ПРОЙДЕНА ПОВТОРНО";
 
         if (storyEarnedReward > 0)
         {
             AddCoins(storyEarnedReward);
         }
-        else
+        else if (receivedUniqueReward || firstCompletion)
         {
             PlayerPrefs.Save();
         }

@@ -39,18 +39,20 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
     private static readonly string[] CarNames =
     {
         "NEON R", "VOLT S", "DRIFT RX", "TITAN GT",
-        "PHANTOM X", "RAPTOR 4X", "BLAZE RS", "NOVA LM", "ZENITH Q"
+        "PHANTOM X", "RAPTOR 4X", "BLAZE RS", "NOVA LM", "ZENITH Q",
+        "SIGNAL GHOST", "MAGMA RAM", "TEMPEST XR", "IKARUS ZERO"
     };
     private static readonly string[] CarClasses =
     {
         "СБАЛАНСИРОВАННЫЙ", "СКОРОСТЬ", "ДРИФТ", "БРОНЯ",
-        "ГИПЕРКАР", "РАЛЛИ", "МОЩНОСТЬ", "ПРОТОТИП", "МАНЁВРЕННОСТЬ"
+        "ГИПЕРКАР", "РАЛЛИ", "МОЩНОСТЬ", "ПРОТОТИП", "МАНЁВРЕННОСТЬ",
+        "РАЗВЕДЧИК", "ТАРАН", "ШТУРМ", "ЛЕГЕНДА"
     };
-    private static readonly int[] CarPrices = { 0, 850, 1250, 1700, 2300, 2600, 2900, 3400, 3000 };
-    private static readonly float[] CarAcceleration = { 1f, 1.1f, 1.03f, 0.96f, 1.14f, 1.02f, 1.15f, 1.12f, 1.07f };
-    private static readonly float[] CarTopSpeed = { 1f, 1.12f, 1.04f, 0.97f, 1.18f, 1.01f, 1.09f, 1.2f, 1.06f };
-    private static readonly float[] CarHandling = { 1f, 0.96f, 1.13f, 0.94f, 1.02f, 1.08f, 0.92f, 1.1f, 1.2f };
-    private static readonly float[] CarDamage = { 1f, 1.08f, 1f, 0.7f, 1.1f, 0.78f, 0.88f, 1.05f, 0.98f };
+    private static readonly int[] CarPrices = { 0, 850, 1250, 1700, 2300, 2600, 2900, 3400, 3000, 0, 0, 0, 0 };
+    private static readonly float[] CarAcceleration = { 1f, 1.1f, 1.03f, 0.96f, 1.14f, 1.02f, 1.15f, 1.12f, 1.07f, 1.13f, 1.08f, 1.17f, 1.18f };
+    private static readonly float[] CarTopSpeed = { 1f, 1.12f, 1.04f, 0.97f, 1.18f, 1.01f, 1.09f, 1.2f, 1.06f, 1.08f, 1.01f, 1.15f, 1.2f };
+    private static readonly float[] CarHandling = { 1f, 0.96f, 1.13f, 0.94f, 1.02f, 1.08f, 0.92f, 1.1f, 1.2f, 1.18f, 0.88f, 1f, 1.14f };
+    private static readonly float[] CarDamage = { 1f, 1.08f, 1f, 0.7f, 1.1f, 0.78f, 0.88f, 1.05f, 0.98f, 1.15f, 0.64f, 0.88f, 0.8f };
     private static readonly Vector3[] CarScales =
     {
         new Vector3(1f, 1f, 1f),
@@ -61,7 +63,11 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
         new Vector3(1.12f, 1.08f, 1f),
         new Vector3(1.1f, 1.02f, 1f),
         new Vector3(0.94f, 1.12f, 1f),
-        new Vector3(0.96f, 1f, 1f)
+        new Vector3(0.96f, 1f, 1f),
+        new Vector3(0.92f, 1.08f, 1f),
+        new Vector3(1.18f, 1.06f, 1f),
+        new Vector3(1.08f, 1.08f, 1f),
+        new Vector3(0.94f, 1.12f, 1f)
     };
     private static readonly Color[] PaintColors =
     {
@@ -240,7 +246,11 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
             Resources.Load<Sprite>("UI/TrackCarRaptor4X"),
             Resources.Load<Sprite>("UI/TrackCarBlazeRS"),
             Resources.Load<Sprite>("UI/TrackCarNovaLM"),
-            Resources.Load<Sprite>("UI/TrackCarZenithQ")
+            Resources.Load<Sprite>("UI/TrackCarZenithQ"),
+            Resources.Load<Sprite>("UI/TrackCarSignalGhost"),
+            Resources.Load<Sprite>("UI/TrackCarMagmaRam"),
+            Resources.Load<Sprite>("UI/TrackCarTempestXR"),
+            Resources.Load<Sprite>("UI/TrackCarIkarusZero")
         };
         trackBrokenCarSprites = new[]
         {
@@ -248,6 +258,10 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
             Resources.Load<Sprite>("UI/TrackCarBrokenVoltS"),
             Resources.Load<Sprite>("UI/TrackCarBrokenDriftRX"),
             Resources.Load<Sprite>("UI/TrackCarBrokenTitanGT"),
+            null,
+            null,
+            null,
+            null,
             null,
             null,
             null,
@@ -260,6 +274,10 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
             Resources.Load<Sprite>("UI/TrackCarBrokenVoltSVariant2"),
             Resources.Load<Sprite>("UI/TrackCarBrokenDriftRXVariant2"),
             Resources.Load<Sprite>("UI/TrackCarBrokenTitanGTVariant2"),
+            null,
+            null,
+            null,
+            null,
             null,
             null,
             null,
@@ -1163,7 +1181,7 @@ public sealed partial class NeonCircuitGame : MonoBehaviour
             {
                 continue;
             }
-            GameObject root = new GameObject("Neon Rocket Pickup " + (i + 1));
+            GameObject root = new GameObject("Weapon Energy Pickup " + (i + 1));
             root.transform.SetParent(transform);
             root.transform.position = PathPoint(t, lane);
             root.transform.rotation = Quaternion.Euler(0f, 0f, PathRotation(t));
@@ -1834,6 +1852,8 @@ opponents.Add(ai);
         weaponDamageLevel = Mathf.Clamp(PlayerPrefs.GetInt(WeaponDamageKey, 0), 0, MaxUpgradeLevel);
         weaponAmmoLevel = Mathf.Clamp(PlayerPrefs.GetInt(WeaponAmmoKey, 0), 0, MaxUpgradeLevel);
         weaponRateLevel = Mathf.Clamp(PlayerPrefs.GetInt(WeaponRateKey, 0), 0, MaxUpgradeLevel);
+        LoadStoryProgress();
+        LoadStoryRewardProgress();
         selectedCarIndex = Mathf.Clamp(PlayerPrefs.GetInt(SelectedCarKey, 0), 0, CarNames.Length - 1);
         if (!IsCarOwned(selectedCarIndex))
         {
@@ -1843,7 +1863,6 @@ opponents.Add(ai);
         garageCarIndex = selectedCarIndex;
         paintColorIndex = Mathf.Clamp(PlayerPrefs.GetInt(PaintKey, 0), 0, PaintColors.Length - 1);
         neonColorIndex = Mathf.Clamp(PlayerPrefs.GetInt(NeonKey, 0), 0, NeonColors.Length - 1);
-        LoadStoryProgress();
     }
 
     private void SaveProgress()
@@ -1858,6 +1877,7 @@ opponents.Add(ai);
         PlayerPrefs.SetInt(SelectedCarKey, selectedCarIndex);
         PlayerPrefs.SetInt(PaintKey, paintColorIndex);
         PlayerPrefs.SetInt(NeonKey, neonColorIndex);
+        PlayerPrefs.SetInt(SelectedWeaponKey, (int)selectedWeaponType);
         PlayerPrefs.Save();
     }
 
@@ -1875,6 +1895,14 @@ opponents.Add(ai);
         }
         else
         {
+            int storyChapter = GetStoryCarUnlockChapter(garageCarIndex);
+            if (storyChapter >= 0)
+            {
+                garageMessage = "ПРОЙДИТЕ ГЛАВУ " + (storyChapter + 1).ToString("00") + " СЮЖЕТА";
+                garageMessageUntil = Time.unscaledTime + 2.5f;
+                return;
+            }
+
             int price = CarPrices[garageCarIndex];
             if (coins < price)
             {
@@ -4316,10 +4344,17 @@ private void DrawCarPreview(Rect rect, int carIndex)
         }
 
         Rect panelRect = new Rect(screenWidth - 327f, screenHeight - 111f, 302f, 87f);
-        bool armed = playerWeapon.Ammo > 0;
-        Color weaponAccent = playerWeapon.ActiveWeapon == CarWeaponType.PlasmaBlaster
-            ? new Color(0.22f, 0.62f, 1f)
-            : new Color(0.18f, 1f, 0.62f);
+        bool armed = playerWeapon.CanFire;
+        Color weaponAccent;
+        switch (playerWeapon.ActiveWeapon)
+        {
+            case CarWeaponType.PlasmaBlaster: weaponAccent = new Color(0.22f, 0.62f, 1f); break;
+            case CarWeaponType.EchoArc: weaponAccent = new Color(0.12f, 0.94f, 1f); break;
+            case CarWeaponType.OrbitMine: weaponAccent = new Color(1f, 0.45f, 0.06f); break;
+            case CarWeaponType.IcarLance: weaponAccent = new Color(1f, 0.82f, 0.12f); break;
+            case CarWeaponType.PhantomSwarm: weaponAccent = new Color(0.96f, 0.22f, 0.9f); break;
+            default: weaponAccent = new Color(0.18f, 1f, 0.62f); break;
+        }
         Color accent = armed ? weaponAccent : new Color(0.42f, 0.48f, 0.5f);
         DrawSolidRect(new Rect(panelRect.x + 6f, panelRect.y + 7f, panelRect.width, panelRect.height), new Color(0f, 0f, 0f, 0.46f));
         GUI.Box(panelRect, GUIContent.none, hudStyle);
@@ -4329,7 +4364,9 @@ private void DrawCarPreview(Rect rect, int carIndex)
 
         string status = playerWeapon.PickupFlashActive
             ? "БОЕЗАПАС ПОЛУЧЕН  +3"
-            : armed ? "SPACE - ОГОНЬ    Q - СМЕНИТЬ" : "НАЙДИ КОНТЕЙНЕР    Q - СМЕНИТЬ";
+            : armed
+                ? "SPACE - ОГОНЬ  [" + playerWeapon.ActiveWeaponAmmoCost + "]    Q - СМЕНИТЬ"
+                : "НУЖНО ЭНЕРГИИ: " + playerWeapon.ActiveWeaponAmmoCost + "    Q - СМЕНИТЬ";
         GUI.Label(new Rect(panelRect.x + 16f, panelRect.y + 48f, panelRect.width - 32f, 24f), status, microStyle);
     }
 

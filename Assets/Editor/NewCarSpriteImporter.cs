@@ -11,7 +11,11 @@ public sealed class NewCarSpriteImporter : AssetPostprocessor
         "GarageCarRaptor4X.png",
         "GarageCarBlazeRS.png",
         "GarageCarNovaLM.png",
-        "GarageCarZenithQ.png"
+        "GarageCarZenithQ.png",
+        "GarageCarSignalGhost.png",
+        "GarageCarMagmaRam.png",
+        "GarageCarTempestXR.png",
+        "GarageCarIkarusZero.png"
     };
 
     private static readonly HashSet<string> TrackSprites = new HashSet<string>
@@ -20,7 +24,19 @@ public sealed class NewCarSpriteImporter : AssetPostprocessor
         "TrackCarRaptor4X.png",
         "TrackCarBlazeRS.png",
         "TrackCarNovaLM.png",
-        "TrackCarZenithQ.png"
+        "TrackCarZenithQ.png",
+        "TrackCarSignalGhost.png",
+        "TrackCarMagmaRam.png",
+        "TrackCarTempestXR.png",
+        "TrackCarIkarusZero.png"
+    };
+
+    private static readonly HashSet<string> StoryWeaponIcons = new HashSet<string>
+    {
+        "EchoArc.png",
+        "OrbitMine.png",
+        "IcarLance.png",
+        "PhantomSwarm.png"
     };
 
     private void OnPreprocessTexture()
@@ -38,6 +54,19 @@ public sealed class NewCarSpriteImporter : AssetPostprocessor
             importer.wrapMode = TextureWrapMode.Clamp;
             importer.textureCompression = TextureImporterCompression.Uncompressed;
             importer.maxTextureSize = 2048;
+            return;
+        }
+
+        if (StoryWeaponIcons.Contains(fileName))
+        {
+            importer.textureType = TextureImporterType.Default;
+            importer.isReadable = false;
+            importer.mipmapEnabled = false;
+            importer.alphaIsTransparency = true;
+            importer.filterMode = FilterMode.Point;
+            importer.wrapMode = TextureWrapMode.Clamp;
+            importer.textureCompression = TextureImporterCompression.CompressedHQ;
+            importer.maxTextureSize = 512;
             return;
         }
 
