@@ -308,9 +308,10 @@ public sealed partial class NeonCircuitGame
 
     public void PlayPickupSfx(bool repair)
     {
-        if (raceSfxSource == null) return;
+        AudioClip clip = repair ? repairClip : pickupClip;
+        if (raceSfxSource == null || clip == null) return;
         raceSfxSource.pitch = 1f;
-        raceSfxSource.PlayOneShot(repair ? repairClip : pickupClip, 0.82f);
+        raceSfxSource.PlayOneShot(clip, 0.82f);
     }
 
     public void PlayWeaponSfx(CarWeaponType weaponType)

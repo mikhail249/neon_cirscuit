@@ -73,6 +73,12 @@ public sealed partial class NeonCircuitGame
             return true;
         }
 
+        if (tutorialActive)
+        {
+            DrawDrivingTutorialGui(screenWidth, screenHeight);
+            return true;
+        }
+
         DrawArcadeWeather(screenWidth, screenHeight);
         DrawArcadeRaceHud(screenWidth, screenHeight);
         DrawArcadeRaceEffects(screenWidth, screenHeight);
@@ -495,6 +501,7 @@ public sealed partial class NeonCircuitGame
             if (DrawArcadeButton(new Rect(fallbackX, 220f, 500f, 88f), "01", "START", "ВЫБЕРИТЕ РЕЖИМ", ArcadePink, true)) OpenMainMenuModeSelection();
             if (DrawArcadeButton(new Rect(fallbackX, 326f, 500f, 88f), "02", "ГАРАЖ", "МАШИНЫ / ТЮНИНГ", ArcadeCyan, false)) garageOpen = true;
             if (DrawArcadeButton(new Rect(fallbackX, 432f, 500f, 88f), "03", "ВЫХОД", string.Empty, ArcadeYellow, false)) QuitGame();
+            DrawTutorialMenuEntry(new Rect(fallbackX, 538f, 500f, 88f));
             DrawArcadeMenuMotionOverlay(screenWidth, screenHeight);
             return;
         }
@@ -549,6 +556,8 @@ public sealed partial class NeonCircuitGame
         }
 
         DrawMainMenuWeatherToggle(screenWidth, screenHeight);
+
+        DrawTutorialMenuEntry(RetroRect(new Rect(78f, 756f, 486f, 88f), screenWidth, screenHeight));
 
         Rect coinValue = RetroRect(new Rect(1360f, 710f, 205f, 88f), screenWidth, screenHeight);
         DrawSolidRect(coinValue, new Color(0.045f, 0.035f, 0.002f, 1f));
@@ -1546,12 +1555,10 @@ public sealed partial class NeonCircuitGame
         }
 
         DrawMinimap(screenWidth);
-        DrawPlayerDurability(screenWidth, screenHeight);
-        DrawPlayerWeaponHud(screenWidth, screenHeight);
-        Rect controls = new Rect(20f, screenHeight - 58f, 930f, 38f);
-        DrawSolidRect(controls, new Color(0.008f, 0.025f, 0.06f, 0.94f));
-        DrawSolidRect(new Rect(controls.x, controls.y, controls.width, 3f), ArcadeCyan);
-        GUI.Label(new Rect(controls.x + 13f, controls.y + 9f, controls.width - 26f, 20f), "WASD DRIVE   SHIFT DRIFT   X NITRO   SPACE FIRE   Q WEAPON   G GARAGE   R RESTART", arcadeMicroStyle);
+        GetRaceHudLayout(screenWidth, screenHeight, out Rect controls, out Rect durability, out Rect weapon);
+        DrawPlayerDurability(durability);
+        DrawPlayerWeaponHud(weapon);
+        DrawRaceControls(controls);
     }
 
     private void DrawArcadeRaceEffects(float screenWidth, float screenHeight)

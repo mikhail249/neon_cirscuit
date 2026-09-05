@@ -313,7 +313,7 @@ public sealed class CarDamage : MonoBehaviour
 
     public void TakeDamageAt(float amount, Vector2 impactPoint)
     {
-        if (broken || amount <= 0f)
+        if (broken || amount <= 0f || (playerCar && game != null && game.IsTutorialActive))
         {
             return;
         }

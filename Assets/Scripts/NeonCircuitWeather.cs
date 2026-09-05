@@ -89,7 +89,7 @@ public sealed partial class NeonCircuitGame
     {
         get
         {
-            if (!weatherEnabled)
+            if (!weatherEnabled || tutorialActive)
             {
                 return 1f;
             }
@@ -112,7 +112,7 @@ public sealed partial class NeonCircuitGame
     {
         get
         {
-            return weatherEnabled
+            return weatherEnabled && !tutorialActive
                 && (ActiveWeather == CircuitWeather.Rain || ActiveWeather == CircuitWeather.Thunderstorm);
         }
     }

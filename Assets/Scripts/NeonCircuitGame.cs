@@ -2149,6 +2149,7 @@ opponents.Add(ai);
         storyModeOpen = false;
         ApplySelectedCarVisuals();
         RestartRace();
+        if (pendingDrivingTutorial) BeginDrivingTutorial();
     }
 
     private IEnumerator BeginRaceAfterReload()
@@ -2174,6 +2175,7 @@ opponents.Add(ai);
 
     private void OpenMainMenu()
     {
+        if (tutorialActive) EndDrivingTutorial();
         bool returnToStory = storyRaceActive;
         mainMenuOpen = true;
         garageOpen = false;
@@ -2287,6 +2289,11 @@ opponents.Add(ai);
         nitroFlashAmount = Mathf.MoveTowards(nitroFlashAmount, 0f, Time.unscaledDeltaTime * 3.8f);
         UpdateExtendedAudio();
         UpdateStartGantryLights();
+        if (tutorialActive)
+        {
+            UpdateDrivingTutorial();
+            return;
+        }
         if (mainMenuOpen)
         {
             if (storyModeOpen)
@@ -2335,6 +2342,11 @@ opponents.Add(ai);
             }
             else
             {
+                if (TutorialShortcutPressed())
+                {
+                    StartDrivingTutorial();
+                    return;
+                }
                 int trackChoice = TrackChoicePressed();
                 if (trackChoice >= 0 && trackChoice < RaceTrackCatalog.Count)
                 {
@@ -3290,6 +3302,7 @@ opponents[i].ResetRacer();
         microStyle = new GUIStyle(smallStyle);
         microStyle.fontSize = 12;
         microStyle.normal.textColor = new Color(0.38f, 0.62f, 0.64f);
+
     }
 
     private float MenuIntroProgress(float delay, float duration)
@@ -4316,7 +4329,33 @@ private void DrawCarPreview(Rect rect, int carIndex)
         GUI.color = previous;
     }
 
-    private void DrawPlayerDurability(float screenWidth, float screenHeight)
+    private void GetRaceHudLayout(float screenWidth, float screenHeight, out Rect controls, out Rect durability, out Rect weapon)
+    {
+        const float margin = 20f;
+        const float gap = 12f;
+        float availableWidth = Mathf.Max(1f, screenWidth - margin * 2f);
+        float controlsWidth = Mathf.Min(RaceControlsNaturalWidth(), availableWidth);
+        float controlsHeight = RaceControlsHeight(controlsWidth);
+        controls = new Rect((screenWidth - controlsWidth) * 0.5f, screenHeight - margin - controlsHeight, controlsWidth, controlsHeight);
+
+        // The same wrapping measurement drives drawing and the space reserved for telemetry.
+        float readoutWidth = Mathf.Min(660f, availableWidth);
+        float readoutX = (screenWidth - readoutWidth) * 0.5f;
+        float readoutY = controls.y - gap - 83f;
+        if (readoutWidth >= 580f)
+        {
+            float healthWidth = (readoutWidth - gap) * 0.46f;
+            durability = new Rect(readoutX, readoutY, healthWidth, 78f);
+            weapon = new Rect(durability.xMax + gap, readoutY, readoutWidth - healthWidth - gap, 78f);
+        }
+        else
+        {
+            weapon = new Rect(readoutX, readoutY, readoutWidth, 78f);
+            durability = new Rect(readoutX, weapon.y - gap - 83f, readoutWidth, 78f);
+        }
+    }
+
+    private void DrawPlayerDurability(Rect rect)
     {
         if (playerDamage == null)
         {
@@ -4324,26 +4363,23 @@ private void DrawCarPreview(Rect rect, int carIndex)
         }
 
         float ratio = Mathf.Clamp01(playerDamage.Health / global::CarDamage.MaxHealth);
-        const float barWidth = 430f;
-        const float barHeight = 16f;
-        float x = screenWidth * 0.5f - barWidth * 0.5f;
-        float y = screenHeight - 48f;
-
-        GUI.Label(new Rect(x, y - 25f, barWidth, 22f), "ПРОЧНОСТЬ  " + Mathf.CeilToInt(playerDamage.Health) + " / " + Mathf.CeilToInt(global::CarDamage.MaxHealth), smallStyle);
-        DrawSolidRect(new Rect(x - 4f, y - 4f, barWidth + 8f, barHeight + 8f), new Color(0.005f, 0.01f, 0.015f, 0.92f));
-        DrawSolidRect(new Rect(x, y, barWidth, barHeight), new Color(0.16f, 0.025f, 0.025f, 0.96f));
-        DrawSolidRect(new Rect(x, y, barWidth * ratio, barHeight), new Color(0.96f, 0.055f, 0.045f, 1f));
-        DrawSolidRect(new Rect(x, y, barWidth * ratio, 3f), new Color(1f, 0.38f, 0.3f, 0.92f));
+        EnsureControlStyles();
+        DrawControlSurface(rect);
+        GUI.Label(new Rect(rect.x + 16f, rect.y + 11f, rect.width - 140f, 26f), "ПРОЧНОСТЬ", controlSmallStyle);
+        GUI.Label(new Rect(rect.xMax - 120f, rect.y + 10f, 104f, 27f), Mathf.CeilToInt(playerDamage.Health) + " / " + Mathf.CeilToInt(global::CarDamage.MaxHealth), controlValueStyle);
+        Rect bar = new Rect(rect.x + 16f, rect.yMax - 26f, rect.width - 32f, 9f);
+        DrawRoundedRect(bar, new Color(0.15f, 0.22f, 0.28f), 5f);
+        Color healthColor = ratio > 0.5f ? ControlsMint : ratio > 0.25f ? new Color(1f, 0.77f, 0.4f) : new Color(1f, 0.34f, 0.4f);
+        DrawRoundedRect(new Rect(bar.x, bar.y, bar.width * ratio, bar.height), healthColor, 5f);
     }
 
-    private void DrawPlayerWeaponHud(float screenWidth, float screenHeight)
+    private void DrawPlayerWeaponHud(Rect panelRect)
     {
         if (playerWeapon == null)
         {
             return;
         }
 
-        Rect panelRect = new Rect(screenWidth - 327f, screenHeight - 111f, 302f, 87f);
         bool armed = playerWeapon.CanFire;
         Color weaponAccent;
         switch (playerWeapon.ActiveWeapon)
@@ -4356,18 +4392,18 @@ private void DrawCarPreview(Rect rect, int carIndex)
             default: weaponAccent = new Color(0.18f, 1f, 0.62f); break;
         }
         Color accent = armed ? weaponAccent : new Color(0.42f, 0.48f, 0.5f);
-        DrawSolidRect(new Rect(panelRect.x + 6f, panelRect.y + 7f, panelRect.width, panelRect.height), new Color(0f, 0f, 0f, 0.46f));
-        GUI.Box(panelRect, GUIContent.none, hudStyle);
-        DrawSolidRect(new Rect(panelRect.x, panelRect.y, panelRect.width, 3f), accent);
-        GUI.Label(new Rect(panelRect.x + 16f, panelRect.y + 11f, 185f, 22f), playerWeapon.ActiveWeaponName, smallStyle);
-        GUI.Label(new Rect(panelRect.x + 207f, panelRect.y + 9f, 80f, 28f), playerWeapon.Ammo + " / " + playerWeapon.MaxAmmo, labelStyle);
+        EnsureControlStyles();
+        DrawControlSurface(panelRect);
+        DrawRoundedRect(new Rect(panelRect.x + 15f, panelRect.y + 19f, 6f, 6f), accent, 3f);
+        GUI.Label(new Rect(panelRect.x + 29f, panelRect.y + 9f, panelRect.width - 127f, 29f), playerWeapon.ActiveWeaponName, controlSmallStyle);
+        GUI.Label(new Rect(panelRect.xMax - 92f, panelRect.y + 10f, 76f, 27f), playerWeapon.Ammo + " / " + playerWeapon.MaxAmmo, controlValueStyle);
 
         string status = playerWeapon.PickupFlashActive
             ? "БОЕЗАПАС ПОЛУЧЕН  +3"
             : armed
-                ? "SPACE - ОГОНЬ  [" + playerWeapon.ActiveWeaponAmmoCost + "]    Q - СМЕНИТЬ"
-                : "НУЖНО ЭНЕРГИИ: " + playerWeapon.ActiveWeaponAmmoCost + "    Q - СМЕНИТЬ";
-        GUI.Label(new Rect(panelRect.x + 16f, panelRect.y + 48f, panelRect.width - 32f, 24f), status, microStyle);
+                ? "Готово к пуску · расход " + playerWeapon.ActiveWeaponAmmoCost
+                : playerWeapon.Ammo < playerWeapon.ActiveWeaponAmmoCost ? "Подбери боезапас на трассе" : "Перезарядка…";
+        GUI.Label(new Rect(panelRect.x + 16f, panelRect.y + 44f, panelRect.width - 32f, 22f), status, controlSmallStyle);
     }
 
 private void DrawWreckedOverlay(float screenWidth, float screenHeight)
@@ -4527,13 +4563,13 @@ if (raceStarted && !float.IsPositiveInfinity(bestLap))
         }
 
         
-        GUI.Box(new Rect(22f, screenHeight - 70f, 975f, 46f), GUIContent.none, hudStyle);
-        GUI.Label(new Rect(40f, screenHeight - 60f, 945f, 25f), "WASD - РЈРџР РђР’Р›Р•РќРР•    SHIFT - Р”Р РР¤Рў    X - НИТРО    SPACE - РћР“РћРќР¬    Q - РћР РЈР–РР•    G - Р“РђР РђР–    R - Р Р•РЎРўРђР Рў", smallStyle);
+        GetRaceHudLayout(screenWidth, screenHeight, out Rect controls, out Rect durability, out Rect weapon);
+        DrawRaceControls(controls);
 
         if (!garageOpen)
         {
-            DrawPlayerDurability(screenWidth, screenHeight);
-            DrawPlayerWeaponHud(screenWidth, screenHeight);
+            DrawPlayerDurability(durability);
+            DrawPlayerWeaponHud(weapon);
         }
 
         if (garageOpen)
@@ -4638,6 +4674,8 @@ public sealed class ArcadeCarController : MonoBehaviour
     public float NitroFuel { get { return nitroFuel; } }
     public bool IsDrifting { get { return isDrifting; } }
     public bool IsNitroActive { get { return nitroActive; } }
+    public float ThrottleInput { get; private set; }
+    public float SteeringInput { get; private set; }
 
     public void Initialize(NeonCircuitGame owner, Rigidbody2D rigidbody)
     {
@@ -4790,6 +4828,8 @@ private void FixedUpdate()
     bool driftHeld;
     bool nitroPressed;
     ReadInput(out throttle, out steer, out driftHeld, out nitroPressed);
+    ThrottleInput = throttle;
+    SteeringInput = steer;
 
     if (damageState == null)
     {
@@ -5009,6 +5049,9 @@ private void RecoverToTrack()
 
 public void ResetToStart()
 {
+    ThrottleInput = 0f;
+    SteeringInput = 0f;
+    speedKph = 0f;
     finished = false;
     broken = false;
     driftAmount = 0f;
@@ -6633,6 +6676,16 @@ public sealed class SmoothRaceCamera : MonoBehaviour
         shakeIntensity = Mathf.Max(shakeIntensity, amount);
         shakeTime = Mathf.Max(shakeTime, duration);
         shakeDuration = Mathf.Max(shakeDuration, duration);
+    }
+
+    public void SnapToTarget()
+    {
+        if (target == null) return;
+        velocity = Vector3.zero;
+        shakeOffset = Vector3.zero;
+        shakeTime = shakeDuration = shakeIntensity = zoomVelocity = 0f;
+        transform.position = new Vector3(target.position.x, target.position.y, -10f);
+        if (raceCamera != null) raceCamera.orthographicSize = baseOrthographicSize;
     }
 
     private void LateUpdate()

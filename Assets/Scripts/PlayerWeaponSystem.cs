@@ -36,6 +36,7 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
     private float pickupFlashUntil;
 
     public int Ammo { get { return ammo; } }
+    public int ShotsFired { get; private set; }
     public int MaxAmmo { get { return playerControlled && game != null ? game.PlayerWeaponMaxAmmo : MaximumAmmo; } }
     public float DamageMultiplier { get { return playerControlled && game != null ? game.PlayerWeaponDamageMultiplier : 1f; } }
     public CarWeaponType ActiveWeapon { get { return activeWeapon; } }
@@ -169,11 +170,13 @@ public sealed class PlayerWeaponSystem : MonoBehaviour
             game.PlayWeaponSfx(weaponToFire);
         }
 
+        ShotsFired++;
         return true;
     }
 
     public void ResetWeapon()
     {
+        ShotsFired = 0;
         ammo = 0;
         activeWeapon = playerControlled && game != null
             ? game.SelectedWeaponType
